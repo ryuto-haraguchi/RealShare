@@ -1,5 +1,7 @@
 class Post < ApplicationRecord
 
+  enum category: { "buy": 0, "sale": 1, "rental": 2, "local_information": 3 }
+
   belongs_to :user
   has_many :comments, dependent: :destroy
   has_many :bookmarks, dependent: :destroy
