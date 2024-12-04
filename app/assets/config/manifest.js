@@ -4,4 +4,5 @@
 //= link_directory ../stylesheets/public/registrations_sessions .css
 //= link_directory ../stylesheets/public/users .css
 //= link_directory ../stylesheets/public/posts .css
+//= link_directory ../stylesheets/public/comments .css
 
