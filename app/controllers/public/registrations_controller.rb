@@ -10,7 +10,7 @@ class Public::RegistrationsController < Devise::RegistrationsController
   end
 
   def configure_account_update_params
-    devise_parameter_sanitizer.permit(:account_update, keys: [:name, :prefecture, :city, :town])
+    devise_parameter_sanitizer.permit(:account_update, keys: [:name, :prefecture, :city, :town, :profile_image])
   end
 
   def after_sign_up_path_for(resource)
