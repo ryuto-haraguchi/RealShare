@@ -1,2 +1,7 @@
-<h1>Public::Users#mypage</h1>
-<p>Find me in app/views/public/users/mypage.html.erb</p>
+<%= content_for :css do %>
+  <%= stylesheet_link_tag 'public/posts/posts', media: 'all', 'data-turbolinks-track': 'reload' %>
+<% end %>
+
+<%= render 'user_information', user: @user, posts: @posts %>
+
+<%= javascript_pack_tag 'posts/category_switch' %>
