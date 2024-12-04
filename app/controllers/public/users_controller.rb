@@ -5,9 +5,16 @@ class Public::UsersController < ApplicationController
   end
 
   def mypage
+    @user = current_user
+    @posts = @user.posts.page(params[:page]).per(3)
   end
 
-  def edit
+  def update
+    if current_user.update(user_params)
+      redirect_to mypage_users_path
+    else
+      render :mypage
+    end
   end
 
   def show
@@ -18,7 +25,7 @@ class Public::UsersController < ApplicationController
   private
 
   def user_params
-    params.require(:user).permit(:name, :prefecture, :city, :town, :profile_image)
+    params.require(:user).permit(:name, :prefecture, :city, :town, :profile_image, :is_public)
   end
 
 end
