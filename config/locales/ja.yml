@@ -11,6 +11,24 @@ ja:
         unsupported: "未対応"
         supported: "対応済み"
   activerecord:
+    models:
+      post: "投稿"
+      user: "ユーザー"
+    attributes:
+      post:
+        title: "タイトル"
+        content: "内容"
+        category: "カテゴリー"
+        status: "ステータス"
+        user_id: "ユーザーID"
+      user:
+        name: "ユーザーネーム"
+        email: "メールアドレス"
+        password: "パスワード"
+        password_confirmation: "パスワード確認用"
+        prefecture: "都道府県"
+        city: "市区町村"
+        town: "町名"
     errors:
       messages:
         record_invalid: 'バリデーションに失敗しました: %{errors}'

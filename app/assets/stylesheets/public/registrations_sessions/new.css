@@ -1,0 +1,18 @@
+.sign-up-title {
+  color: cadetblue;
+  font-size: 50px;
+}
+
+.label {
+  color: cadetblue;
+}
+
+.btn-sign-up {
+   background-color: darkcyan;
+   color: white;
+   width: 100px;
+}
+
+.btn:hover {
+  color: white;
+}
