@@ -20,5 +20,9 @@ class Post < ApplicationRecord
   def category_i18n
     I18n.t("enums.post.category.#{category}")
   end
+
+  def full_address
+    "#{prefecture}#{city}#{town}"
+  end
   
 end
