@@ -16,5 +16,9 @@ class Post < ApplicationRecord
   validates :town, presence: true
   validates :latitude, presence: true
   validates :longitude, presence: true
+
+  def category_i18n
+    I18n.t("enums.post.category.#{category}")
+  end
   
 end

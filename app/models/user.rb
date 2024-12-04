@@ -20,15 +20,16 @@ class User < ApplicationRecord
   validates :city, presence: true
   validates :town, presence: true
 
-  def get_profile_image
+  def get_profile_image(width, height)
     unless profile_image.attached?
       file_path = Rails.root.join('app/assets/images/no_image.jpg')
       profile_image.attach(io: File.open(file_path), filename: 'no_image.jpg', content_type: 'image/jpeg')
     end
-    profile_image.variant(resize_to_limit: [100, 100]).processed
+    profile_image.variant(resize_to_limit: [width, height]).processed
   end
 
   GUEST_USER_EMAIL = "guest@example.com"
+
   def self.guest
     find_or_create_by!(email: GUEST_USER_EMAIL) do |user|
       user.password = SecureRandom.urlsafe_base64
@@ -38,5 +39,7 @@ class User < ApplicationRecord
       user.town = "六本木"
     end
   end
+
+  scope :excluding_guest, -> { where.not(email: GUEST_USER_EMAIL) }
 
 end
