@@ -1,23 +1,29 @@
-<% posts.each do |post| %>
-  <% if controller_name == 'posts' %>
-    <div class="col mb-1 ml-2">
-      <%= image_tag post.user.get_profile_image(50,50) %>
-      <%= link_to post.user.name, user_path(post.user), class: "text-dark" %>
+<% if posts.any? %>
+  <% posts.each do |post| %>
+    <% if controller_name == 'posts' || 'searches' %>
+      <div class="col mb-1 ml-2">
+        <%= image_tag post.user.get_profile_image(50,50) %>
+        <%= link_to post.user.name, user_path(post.user), class: "text-dark" %>
+      </div>
+    <% end %>
+    <div class="card mb-4">
+      <div class="card-header">
+        <span class="category-item d-inline-block text-center" data-category="<%= post.category_before_type_cast %>">
+          <%= post.category_i18n %>
+        </span>
+        <strong class="ml-3"><%= link_to post.title, post_path(post), class: "text-dark" %></strong>
+      </div>
+      <div class="card-body">
+        <p class="card-text"><%= post.content %></p>
+      </div>
+      <div class="card-footer text-muted d-flex justify-content-between">
+        <span><%= l(post.created_at, format: :long) %></span>
+        <span><%= post.full_address %></span>
+      </div>
     </div>
   <% end %>
-  <div class="card mb-4">
-    <div class="card-header">
-      <span class="category-item d-inline-block text-center" data-category="<%= post.category_before_type_cast %>">
-        <%= post.category_i18n %>
-      </span>
-      <strong class="ml-3"><%= link_to post.title, post_path(post), class: "text-dark" %></strong>
-    </div>
-    <div class="card-body">
-      <p class="card-text"><%= post.content %></p>
-    </div>
-    <div class="card-footer text-muted d-flex justify-content-between">
-      <span><%= l(post.created_at, format: :long) %></span>
-      <span><%= post.full_address %></span>
-    </div>
+<% else %>
+  <div class="col-12 text-center">
+    <p>投稿がありません</p>
   </div>
 <% end %>
