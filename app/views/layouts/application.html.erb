@@ -8,10 +8,22 @@
     <script src="https://kit.fontawesome.com/7b2eb5666f.js" crossorigin="anonymous"></script>
     <%= stylesheet_pack_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
+    <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= yield :css %>
   </head>
 
+  <header class="header">
+    <%= render 'layouts/header' %>
+  </header>
+
   <body>
-    <%= yield %>
+    <div class="content-wrapper">
+      <%= yield %>
+    </div>
+
+    <footer class="footer">
+      <%= render 'layouts/footer' %>
+    </footer>
   </body>
+
 </html>
