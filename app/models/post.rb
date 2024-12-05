@@ -17,6 +17,9 @@ class Post < ApplicationRecord
   validates :latitude, presence: true
   validates :longitude, presence: true
 
+  geocoded_by :full_address
+  before_validation :geocode, if: -> { prefecture_changed? || city_changed? || town_changed? }
+
   def category_i18n
     I18n.t("enums.post.category.#{category}")
   end
