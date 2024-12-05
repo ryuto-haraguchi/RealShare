@@ -1,20 +1,12 @@
 <%= content_for :css do %>
   <%= stylesheet_link_tag 'public/posts/posts', media: 'all', 'data-turbolinks-track': 'reload' %>
+  <%= stylesheet_link_tag 'public/users/index', media: 'all', 'data-turbolinks-track': 'reload' %>
 <% end %>
 
-
-<div class="container mt-5">
-  <div class="row text-center">
-    <%= render 'public/posts/posts_header' %>
-  </div>
-  <div class="row mt-5">
-    <div class="col-12">
-      <%= render 'public/posts/post_list', posts: @posts %>
-    </div>
-    <div class="d-flex justify-content-center align-items-center">
-      <%= paginate @posts %>
-    </div>
-  </div>
-</div>
+<% if @posts.present? %>
+  <%= render 'public/posts/posts_index', posts: @posts %>
+<% else %>
+  <%= render 'public/users/users_index', users: @users %>
+<% end %>
 
 <%= javascript_pack_tag 'posts/category_switch' %>

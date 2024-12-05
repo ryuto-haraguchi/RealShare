@@ -1,0 +1,55 @@
+<div class="container mt-5">
+  <div class="row text-center">
+    <div class="form-group">
+      <%= form_with url: searches_path, method: :get, local: true, class: "form-inline d-flex" do |f| %>
+        <%= f.text_field :keyword, placeholder: "投稿ワード検索", class: "form-control", value: params[:keyword] %>
+        <%= f.submit "検索", class: "btn btn-outline-secondary" %>
+      <% end %>  
+    </div>  
+    <div class="col">絞り込み</div>
+    <div class="col">ソート</div>
+    <div class="col">MAP</div>
+    <% if flash[:alert] %>
+      <div class="col-12 alert alert-danger">
+        <%= flash[:alert] %>
+      </div>
+    <% end %>
+  </div>
+  <div class="row mt-5">
+    <div class="col-12">
+      <% if posts.any? %>
+        <% posts.each do |post| %>
+          <% if controller_name == 'posts' || 'searches' %>
+            <div class="col mb-1 ml-2">
+              <%= image_tag post.user.get_profile_image(50,50) %>
+              <%= link_to post.user.name, user_path(post.user), class: "text-dark" %>
+            </div>
+          <% end %>
+          <div class="card mb-4">
+            <div class="card-header">
+              <span class="category-item d-inline-block text-center" data-category="<%= post.category_before_type_cast %>">
+                <%= post.category_i18n %>
+              </span>
+              <strong class="ml-3"><%= link_to post.title, post_path(post), class: "text-dark" %></strong>
+            </div>
+            <div class="card-body">
+              <p class="card-text"><%= post.content %></p>
+            </div>
+            <div class="card-footer text-muted d-flex justify-content-between">
+              <span><%= l(post.created_at, format: :long) %></span>
+              <span><%= post.full_address %></span>
+            </div>
+          </div>
+        <% end %>
+      <% else %>
+        <div class="col-12 text-center">
+          <p>投稿がありません</p>
+        </div>
+      <% end %>
+    </div>
+    <div class="d-flex justify-content-center align-items-center">
+      <%= paginate @posts %>
+    </div>
+  </div>
+</div>
+
