@@ -1,0 +1,44 @@
+<%= content_for :css do %>
+  <%= stylesheet_link_tag 'public/posts/posts', media: 'all', 'data-turbolinks-track': 'reload' %>
+<% end %>
+
+<div class="container mt-5">
+  <div class="row">
+    <div class="col">
+      <div class="mb-3 ml-2">
+        <%= image_tag post.user.get_profile_image(50,50) %>
+        <% if public_namespace? %>
+          <%= link_to post.user.name, user_path(post.user), class: "text-dark" %>
+        <% elsif admin_namespace? %>
+          <%= link_to post.user.name, admin_user_path(post.user), class: "text-dark" %>
+        <% end %>
+      </div>
+      <div class="card mb-4">
+        <div class="card-header">
+          <span class="category-item d-inline-block text-center" data-category="<%= post.category_before_type_cast %>">
+            <%= post.category_i18n %>
+          </span>
+          <% if public_namespace? %>
+            <strong class="ml-3"><%= link_to post.title, post_path(post), class: "text-dark" %></strong>
+          <% elsif admin_namespace? %>
+            <strong class="ml-3"><%= link_to post.title, admin_post_path(post), class: "text-dark" %></strong>
+          <% end %>
+        </div>
+        <div class="card-body">
+          <p class="card-text"><%= post.content %></p>
+        </div>
+        <div class="card-footer text-muted d-flex justify-content-between">
+          <span><%= l(post.created_at, format: :long) %></span>
+          <span><%= post.full_address %></span>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="row mb-5">
+    <div class="col d-flex justify-content-end">
+      <%= link_to "削除", admin_post_path(post), method: :delete, class: "btn btn-danger" %>
+    </div>
+  </div>
+</div>
+
+<%= javascript_pack_tag 'posts/category_switch' %>

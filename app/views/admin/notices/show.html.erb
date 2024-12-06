@@ -1,0 +1,45 @@
+<div class="container mt-5">
+  <div class="row">
+    <h3 class="col-3">通報内容</h3>
+  </div>
+  <div class="row mt-3">
+    <div class="card col-5 offset-1">
+      <div class="card-body">
+        <pre><%= @notice.reason %></pre>
+      </div>
+    </div>
+    <div class="col offset-2">
+      <ul>
+        <li>通報ID： <%= @notice.id %></li>
+        <li class="mt-4">通報種類：
+          <% if @notice.noticeable_type == "Post" %>
+            投稿
+          <% elsif @notice.noticeable_type == "User" %>
+            ユーザー
+          <% elsif @notice.noticeable_type == "Comment" %>
+            コメント
+          <% end %>
+        </li>
+        <li class="mt-4">ステータス： <%= @notice.status_i18n %></li>
+        <li class="mt-4">通報日時： <%= l(@notice.created_at, format: :long) %></li>
+        <li class="mt-4">通報者： <%= link_to @notice.user.name, admin_user_path(@notice.user), class: "text-secondary" %></li>
+      </ul>
+    </div>
+  </div>
+  <div class="row">
+    <h3 class="mt-5 col">通報対象</h3>
+  </div>
+</div>
+<%= render 'common/post_card', post: @noticeable %>
+
+<div class="container">
+  <div class="row">
+    <div class="col-2 offset-10">
+      <% if @notice.status == "unconfirmed" %>
+        <%= link_to '確認しました', admin_notice_path(@notice), method: :patch, class: "btn btn-success" %>
+      <% elsif @notice.status == "confirmed" %>
+        <%= link_to '未確認にする', admin_notice_path(@notice), method: :patch, class: "btn btn-secondary" %>
+      <% end %>
+    </div>
+  </div>
+</div>
