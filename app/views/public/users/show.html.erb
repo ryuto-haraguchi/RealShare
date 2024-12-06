@@ -5,15 +5,18 @@
 <div class="container mt-5">
   <div class="row">
     <div class="col-3 text-center">
-      <%= render 'user_information', user: @user %>
+      <%= render 'common/user_information', user: @user %>
     </div>
     <div class="col-8 offset-1">
-      <%= render 'public/posts/post_list', posts: @posts %>
+      <div class="row">
+        <div class="col-12">
+          <%= render 'common/user_posts', posts: @posts %>
+        </div>
+      </div>
       <div class="d-flex justify-content-center align-items-center">
         <%= paginate @posts %>
       </div>
     </div>
-
   </div>
 </div>
 

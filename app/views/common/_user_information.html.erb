@@ -3,14 +3,14 @@
 <table class="table table-borderless mt-3">
   <tr class="border-bottom">
     <th>地域</th>
-    <td><%= @user.prefecture %></th>
+    <td><%= user.prefecture %></th>
   </tr>
-  <% if @user.is_public == true %>
+  <% if user.is_public == true %>
     <tr>
       <th class="align-middle">詳細地域</th>
       <td class="d-flex flex-column align-items-center">
-          <span class="mb-2"><%= @user.city %></span>
-          <span><%= @user.town %></span>
+          <span class="mb-2"><%= user.city %></span>
+          <span><%= user.town %></span>
       </td>
     </tr>
   <% else %>
@@ -23,7 +23,7 @@
   <% end %>
 </table>
 <div class="d-flex justify-content-start align-items-center ml-4 mb-3">
-  <i class="fa-solid fa-bookmark"></i><%= link_to "ブックマークリスト", user_bookmarks_path(@user), class: "ml-3 text-dark" %>
+  <i class="fa-solid fa-bookmark"></i><%= link_to "ブックマークリスト", user_bookmarks_path(user), class: "ml-3 text-dark" %>
 </div>
 <div class="d-flex justify-content-start align-items-center ml-4">
   <i class="fa-solid fa-user"></i><%= link_to "所属グループ", groups_path, class: "ml-3 text-dark"%>
@@ -50,5 +50,10 @@
   <% end %>
   <div class="d-flex justify-content-start align-items-center mt-3 ml-4">
     <i class="fa-solid fa-gear"></i><%= link_to "登録情報編集", edit_user_registration_path, class: "ml-3 text-dark" %>
+  </div>
+<% end %>
+<% if admin_namespace? %>
+  <div class="d-flex justify-content-start align-items-center mt-3 ml-4">
+    <i class="fa-solid fa-trash"></i><%= link_to "ユーザーを削除する", admin_user_path(user), method: :delete, class: "ml-3 text-dark" %>
   </div>
 <% end %>

@@ -1,0 +1,72 @@
+<% content_for :css do%>
+  <%= stylesheet_link_tag 'public/users/index', media: 'all', 'data-turbolinks-track': 'reload' %>
+<% end %>
+
+<div class="container">
+  <% if flash[:alert] %>
+    <div class="row mt-3">
+        <div class="col-12 alert alert-danger">
+          <%= flash[:alert] %>
+        </div>
+    </div>
+  <% end %>
+  <div class="row mt-4">
+    <div class="col-6 offset-3 text-center mb-3">
+      <h2>ユーザー <i class="fa-duotone fa-solid fa-users"></i> 一覧</h2>
+    </div>
+    <% if public_namespace? %>
+      <div class="col-3 ">
+        <%= form_with url: searches_path, method: :get, local: true do |f| %>
+          <div class="input-group mb-3">
+            <%= f.text_field :user_name, placeholder: "ユーザーネーム", class: "form-control", value: params[:user_name] %>
+            <div class="input-group-append">
+              <%= f.submit "検索", class: "btn btn-outline-secondary" %>
+            </div>
+          </div>
+        <% end %>
+      </div>
+    <% end %>
+    <table class="table">
+      <thead>
+        <tr>
+          <th></th> <%# プロフィールイメージ %>
+          <th class="text-center">ユーザーネーム</th>
+          <th class="text-center">お住まいの地域</th>
+          <th class="text-center">投稿数</th>
+          <th></th> <%# 公開・非公開設定%>
+        </tr>
+      </thead>
+      <tbody>
+        <% users.each do |user| %>
+          <tr>
+            <td class="col-2 text-center"><%= image_tag user.get_profile_image(50, 50) %></td>
+            <td class="col-3 text-center align-middle">
+              <% if public_namespace? %>
+                <%= link_to user.name, user_path(user), class: "text-secondary" %>
+              <% elsif admin_namespace? %>
+                <%= link_to user.name, admin_user_path(user), class: "text-secondary" %>
+              <% end %>
+            </td>
+            <td class="col-3 text-center align-middle"><%= user.prefecture %></td>
+            <td class="col-2 text-center align-middle"><%= user.posts.count %></td>
+            <td class="col-2 text-center align-middle">
+              <% if public_namespace? %>
+                <% if user.is_public == true %>
+                  <i class="fa-solid fa-unlock"></i>
+                <% else %>
+                  <i class="fa-solid fa-lock"></i>
+                <% end %>
+              <% elsif admin_namespace? %>
+                <% if user.is_public? %>
+                  登録中
+                <% else %>
+                  退会済
+                  <% end %>
+              <% end %>
+            </td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
+</div>

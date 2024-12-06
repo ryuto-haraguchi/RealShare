@@ -22,10 +22,4 @@ class Public::UsersController < ApplicationController
     @posts = @user.posts.page(params[:page]).per(3)
   end
 
-  private
-
-  def user_params
-    params.require(:user).permit(:name, :prefecture, :city, :town, :profile_image, :is_public)
-  end
-
 end
