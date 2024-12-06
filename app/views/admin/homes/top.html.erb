@@ -1,0 +1,17 @@
+<div class="container" style="margin-top: 130px;">
+  <div class="row">
+    <h3 class="col-6 offset-3 text-center">
+      <%= link_to "前日の新規登録ユーザー： #{@previous_day_registration_users.count} 人", admin_users_path, class: "text-dark" %>
+    </h3>
+  </div>
+  <div class="row mt-5">
+    <h3 class="col-6 offset-3 text-center">
+      <%= link_to "前日の退会ユーザー： #{@previous_day_registration_unsubscribe_users.count} 人", admin_users_path, class: "text-dark" %>
+    </h3>
+  </div>
+  <div class="row mt-5">
+    <h3 class="col-6 offset-3 text-center">
+      <%= link_to "未確認通報数： #{@notices.count} 件", admin_notices_path(notices_ids: @notices.pluck(:id)), class: "text-dark" %>
+    </h3>
+  </div>
+</div>

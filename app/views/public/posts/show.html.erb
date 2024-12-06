@@ -1,85 +1,7 @@
-<%= content_for :css do %>
-  <%= stylesheet_link_tag 'public/posts/posts', media: 'all', 'data-turbolinks-track': 'reload' %>
-  <%= stylesheet_link_tag 'public/comments/comments', media: 'all', 'data-turbolinks-track': 'reload' %>
-<% end %>
+<%= render 'common/post_card', post: @post %>
+<%= render 'common/post_comments_field', post: @post, comments: @comments %>
 
-<div class="container mt-5">
-  <div class="row">
-    <div class="col">
-      <div class="col mb-3 ml-2">
-        <%= image_tag @post.user.get_profile_image(50,50) %>
-        <%= link_to @post.user.name, user_path(@post.user), class: "text-dark" %>
-      </div>
-      <div class="card mb-4">
-        <div class="card-header">
-          <span class="category-item d-inline-block text-center" data-category="<%= @post.category_before_type_cast %>">
-            <%= @post.category_i18n %>
-          </span>
-          <strong class="ml-3"><%= link_to @post.title, post_path(@post), class: "text-dark" %></strong>
-        </div>
-        <div class="card-body">
-          <p class="card-text"><%= @post.content %></p>
-        </div>
-        <div class="card-footer text-muted d-flex justify-content-between">
-          <span><%= l(@post.created_at, format: :long) %></span>
-          <span><%= @post.full_address %></span>
-        </div>
-      </div>
-    </div>
-  </div>
-  <div class="row">
-    <div class="col">
-      <div class="card">
-        <div class="card-header bg-info p-2 text-white">
-          <span>
-            <strong class="ml-3">コメント一覧</strong>
-          </span>
-        </div>
-        <% if @comments.any? %>
-          <% @comments.each do |comment| %>
-            <div class="card-body border-top d-flex">
-              <div class="mr-4">
-                <%= image_tag comment.user.get_profile_image(50,50) %>
-              </div>
-              <div class="row">
-                <div class="col-12">
-                  <%= link_to comment.user.name, user_path(comment.user), class: "border-bottom text-dark text-decoration-none"%>
-                </div>
-                <div class="col-12">
-                  <%= comment.content %>
-                  <% if comment.user == current_user %>
-                    <span class="ml-5">
-                      <%= link_to "削除", post_comment_path(@post, comment), method: :delete, data: { confirm: "本当に削除しますか？" }, class: "btn btn-danger" %>
-                    </span>
-                  <% end %>
-                </div>
-              </div>
-            </div>
-          <% end %>
-        <% else %>
-          <div class="card-body">
-            コメントはありません
-          </div>
-        <% end %>
-        <div class="card-footer text-muted bg-white">
-          <div class="row">
-            <div class="col-1 text-right"><%= image_tag @post.user.get_profile_image(50,50) %></div>
-            <div class="col-11">
-              <%= form_with model: @comment, url: post_comments_path(@post), method: :post, class: "w-100" do |f| %>
-              <%= f.hidden_field :user_id, value: current_user.id %>
-              <%= f.hidden_field :post_id, value: @post.id %>
-              <%= f.text_area :content, class: "form-control w-100", placeholder: "コメントを入力してください" %>
-            </div>
-            <div class="col-2 offset-1">※255文字以内</div>
-            <div class="col-2 offset-7">
-              <%= f.submit "コメントする", class: "btn btn-primary mt-2" %>
-            </div>
-            <% end %>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
+<div class="container">
   <div class="row mt-5 mb-5">
     <div class="col-12 text-center">
       MAPデータ導入予定
@@ -87,4 +9,3 @@
   </div>
 </div>
 
-<%= javascript_pack_tag 'posts/category_switch' %>

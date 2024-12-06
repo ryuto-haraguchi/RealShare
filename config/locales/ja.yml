@@ -8,8 +8,8 @@ ja:
         local_information: "地域情報"
     notice:
       status:
-        unsupported: "未対応"
-        supported: "対応済み"
+        unconfirmed: "未確認"
+        confirmed: "確認済"
   activerecord:
     models:
       post: "投稿"

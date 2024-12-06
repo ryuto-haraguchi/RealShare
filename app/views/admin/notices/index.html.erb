@@ -1,0 +1,36 @@
+<div class="container mt-5">
+  <div class="row">
+    <h2 class="col-12 text-center">通報一覧</h2>
+    <table class="table">
+      <thead>
+        <tr>
+          <th class="col-1">通報ID</th>
+          <th class="col-2">通報種類</th>
+          <th class="col-3">通報内容</th>
+          <th class="col-2">ステータス</th>
+          <th class="col-3">通報日時</th>
+          <th class="col-1"></th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @notices.each do |notice| %>
+          <tr>
+            <td><%= notice.id %></td>
+            <td>
+              <% if notice.noticeable_type == "Post" %>
+                投稿
+              <% elsif notice.noticeable_type == "User" %>
+                ユーザー
+              <% elsif notice.noticeable_type == "Comment" %>
+                コメント
+              <% end %>
+            </td>
+            <td><%= notice.reason %></td>
+            <td><%= notice.status_i18n %></td>
+            <td><%= l(notice.created_at, format: :long) %></td>
+            <td><%= link_to "詳細", admin_notice_path(notice), class: "text-dark" %></td>
+          </tr>
+        <% end %>
+    </table>
+  </div>
+</div>

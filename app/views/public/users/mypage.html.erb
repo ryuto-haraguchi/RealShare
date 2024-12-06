@@ -25,6 +25,7 @@
                 <div class="card-footer text-muted d-flex justify-content-between">
                   <span><%= l(post.created_at, format: :long) %></span>
                   <span><%= post.full_address %></span>
+                  <span><%= link_to "削除", post_path(post), method: :delete, data: { confirm: "本当に削除しますか？" },class: "btn btn-danger"%></span>
                 </div>
               </div>
             <% end %>

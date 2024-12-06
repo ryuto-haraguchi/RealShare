@@ -1,16 +1,20 @@
 Rails.application.routes.draw do
   
-  devise_for :admins, skip: [:registrations, :passwords], controllers: {
+  devise_for :admin, skip: [:registrations, :passwords], controllers: {
       sessions: 'admin/sessions'
     }
 
   namespace :admin do
 
-    root to: 'sessions#new'
+    root to: 'homes#top'
+
+    get 'top' => 'homes#top'
 
     resources :users, only: [:index, :show, :update, :destroy]
 
     resources :posts, only: [:show, :destroy]
+
+    resources :comments, only: [:destroy]
 
     resources :notices, only: [:index, :show, :update, :destroy]
 
