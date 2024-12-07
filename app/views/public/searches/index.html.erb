@@ -5,8 +5,10 @@
 
 <% if @posts.present? %>
   <%= render 'public/posts/posts_index', posts: @posts %>
-<% else %>
-  <%= render 'public/users/users_index', users: @users %>
+<% elsif @users.present? %>
+  <%= render 'common/users_index', users: @users %>
+<% elsif @groups.present? %>
+  <%= render template: 'public/groups/index', groups: @groups %>
 <% end %>
 
 <%= javascript_pack_tag 'posts/category_switch' %>
