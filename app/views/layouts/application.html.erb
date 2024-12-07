@@ -17,6 +17,20 @@
   </header>
 
   <body>
+    <div class="container mt-3">
+      <div class="row">
+        <% if flash[:notice] %>
+          <p class="col-12 alert alert-success">
+            <%= flash[:notice] %>
+          </p>
+        <% elsif flash[:alert] %>
+          <p class="col-12 alert alert-danger">
+            <%= flash[:alert] %>
+          </p>
+        <% end %>
+      </div>
+    </div>
+
     <div class="content-wrapper">
       <%= yield %>
     </div>

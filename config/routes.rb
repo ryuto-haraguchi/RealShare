@@ -1,5 +1,8 @@
 Rails.application.routes.draw do
   
+  namespace :public do
+    get 'group_users/index'
+  end
   devise_for :admin, skip: [:registrations, :passwords], controllers: {
       sessions: 'admin/sessions'
     }
@@ -49,6 +52,8 @@ Rails.application.routes.draw do
     end
 
     resources :groups, only: [:index, :show, :new, :create, :edit, :update, :destroy] do
+      resources :group_users, only: [:index]
+      get 'user_groups' => 'groups#user_groups', on: :collection
       post 'join' => 'group_users#join'
       delete 'leave' => 'group_users#leave'
     end

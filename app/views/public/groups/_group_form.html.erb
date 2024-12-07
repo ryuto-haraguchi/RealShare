@@ -1,0 +1,33 @@
+<div class="container mt-5">
+  <div class="row">
+    <h1 class="col-6 offset-3 text-center">グループを作成</h1>
+  </div>
+  <div class="row mt-4 justify-content-center">
+    <%= form_with(model: group, local: true, class: "col-6") do |form| %>
+      <% if @group.errors.any? %>
+        <div id="error_explanation" class="alert alert-danger">
+          <h2><%= pluralize(group.errors.count, "件のエラー") %>によりグループを保存できませんでした</h2>
+          <ul>
+            <% @group.errors.full_messages.each do |message| %>
+              <li><%= message %></li>
+            <% end %>
+          </ul>
+        </div>
+      <% end %>
+
+      <div class="form-group">
+        <%= form.label :name, "グループ名", class: "form-label" %>
+        <%= form.text_field :name, class: "form-control" %>
+      </div>
+
+      <div class="form-group mt-3">
+        <%= form.label :description, "説明", class: "form-label" %>
+        <%= form.text_area :description, class: "form-control", rows: 5, style: "height: 150px;" %>
+      </div>
+
+      <div class="mt-4 text-center">
+        <%= form.submit (params[:action] == "new" ? "作成" : "更新"), class: "btn btn-primary w-50" %>
+      </div>
+    <% end %>
+  </div>
+</div>
