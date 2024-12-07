@@ -1,0 +1,27 @@
+.category-buy {
+  background-color: #d05030;
+  padding: 7px;
+  border-radius: 15px;
+  color: white;
+}
+
+.category-sale {
+  background-color: #3a9aca;
+  padding: 7px;
+  border-radius: 15px;
+  color: white;
+}
+
+.category-rental {
+  background-color: #cac53a;
+  padding: 7px;
+  border-radius: 15px;
+  color: white;
+}
+
+.category-local-information {
+  background-color: #3dca3a;
+  padding: 7px;
+  border-radius: 15px;
+  color: white;
+}

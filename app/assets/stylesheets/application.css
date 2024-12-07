@@ -1,15 +1,78 @@
-/*
- * This is a manifest file that'll be compiled into application.css, which will include all the files
- * listed below.
- *
- * Any CSS and SCSS file within this directory, lib/assets/stylesheets, or any plugin's
- * vendor/assets/stylesheets directory can be referenced here using a relative path.
- *
- * You're free to add application-wide styles to this file and they'll appear at the bottom of the
- * compiled file so the styles you add here take precedence over styles defined in any other CSS/SCSS
- * files in this directory. Styles in this file should be added after the last require_* statement.
- * It is generally better to create a new file per style scope.
- *
- *= require_tree .
- *= require_self
- */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+.header {
+  height: 80px;
+  width: 95%;
+  background-color: cadetblue;
+  color: white;
+  padding: 7px 0;
+  border-radius: 30px;
+  margin: 0 auto;
+  margin-top: 30px;
+}
+
+.header .fa-house {
+  font-size: 60px;
+  color: white;
+}
+
+.header .logo-title {
+  font-size: 40px;
+  color: white;
+  text-decoration: none;
+}
+
+.nav-box {
+  margin-right: 10px;
+  display: flex;
+  align-items: center;
+}
+
+.nav-link {
+  color: white;
+  font-size: 18px;
+}
+
+.custom-navbar {
+  position: relative;
+  background-color: cadetblue;
+  padding: 0;
+  z-index: 1;
+}
+
+.custom-navbar .navbar-toggler {
+  border-color: white;
+}
+
+.custom-navbar .navbar-toggler-icon {
+  background-image: url("data:image/svg+xml;charset=UTF8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'%3E%3Cpath stroke='rgba(255, 255, 255, 1)' stroke-width='2' d='M4 7h22M4 15h22M4 23h22'/%3E%3C/svg%3E");
+}
+
+body {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh; 
+  margin: 0;
+}
+
+.content-wrapper {
+  flex: 1; 
+}
+
+
+.footer {
+  height: 80px;
+  width: 95%;
+  background-color: cadetblue;
+  color: white;
+  padding: 7px 0;
+  border-radius: 30px;
+  margin: 0 auto;
+  margin-top: 30px;
+  margin-bottom: 10px;
+}
+

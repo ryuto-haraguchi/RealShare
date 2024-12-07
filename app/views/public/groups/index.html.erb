@@ -1,0 +1,18 @@
+<div class="container">
+  <div class="row mt-4">
+    <div class="col-6 offset-3 text-center mb-3">
+      <h2>グループ一覧</h2>
+    </div>
+    <div class="col-3 ">
+      <%= form_with url: searches_path, method: :get, local: true do |f| %>
+        <div class="input-group mb-3">
+          <%= f.text_field :group_name, placeholder: "グループ名", class: "form-control", value: params[:group_name] %>
+          <div class="input-group-append">
+            <%= f.submit "検索", class: "btn btn-outline-secondary" %>
+          </div>
+        </div>
+      <% end %>
+    </div>
+    <%= render 'public/groups/group_index', groups: @groups %>
+  </div>
+</div>

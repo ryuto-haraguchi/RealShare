@@ -1,0 +1,32 @@
+.title {
+  color: cadetblue;
+  font-size: 80px;
+  margin: 40px 0 0 40px;
+}
+
+.container-top {
+  margin-top: 100px;
+}
+
+.btn {
+  font-size: 20px;
+}
+
+.btn-sign-up {
+  background-color: darkcyan;
+  color: white;
+}
+
+.btn-sign-in {
+  background-color: rgb(101, 167, 215);
+  color: white;
+}
+
+.btn-guest {
+  background-color: rgb(241, 170, 84);
+  color: white;
+}
+
+.btn:hover {
+  color: white;
+}
