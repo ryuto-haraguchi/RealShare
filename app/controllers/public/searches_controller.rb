@@ -1,5 +1,5 @@
-class Public::SearchesController < ApplicationController
-
+class Public::SearchesController < Public::ApplicationController
+  skip_before_action :restrict_guest_user, only: [:index]
   def index
 
     if params[:keyword].present?

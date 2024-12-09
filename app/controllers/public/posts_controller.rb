@@ -1,5 +1,5 @@
-class Public::PostsController < ApplicationController
-  before_action :authenticate_user!, except: [:index]
+class Public::PostsController < Public::ApplicationController
+  skip_before_action :restrict_guest_user, only: [:index]
 
   def index
     @posts = Post.all.page(params[:page]).per(5).order(created_at: :desc)

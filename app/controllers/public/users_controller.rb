@@ -1,5 +1,5 @@
-class Public::UsersController < ApplicationController
-  before_action :authenticate_user!, except: [:index]
+class Public::UsersController < Public::ApplicationController
+  skip_before_action :restrict_guest_user, only: [:index]
 
   def index
     @users = User.excluding_guest

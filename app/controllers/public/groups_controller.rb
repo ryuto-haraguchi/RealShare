@@ -1,5 +1,5 @@
-class Public::GroupsController < ApplicationController
-  before_action :authenticate_user!, except: [:index]  
+class Public::GroupsController < Public::ApplicationController
+  skip_before_action :restrict_guest_user, only: [:index]
 
   def index
     @groups = Group.all
