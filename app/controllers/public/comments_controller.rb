@@ -1,6 +1,5 @@
-class Public::CommentsController < ApplicationController
-  before_action :authenticate_user!
-  
+class Public::CommentsController < Public::ApplicationController
+
   def create
     @comment = Comment.new(comment_params)
     if @comment.save

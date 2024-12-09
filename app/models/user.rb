@@ -40,6 +40,10 @@ class User < ApplicationRecord
     end
   end
 
+  def guest_user?
+    email == GUEST_USER_EMAIL
+  end
+
   scope :excluding_guest, -> { where.not(email: GUEST_USER_EMAIL) }
 
 end

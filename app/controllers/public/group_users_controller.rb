@@ -1,5 +1,4 @@
-class Public::GroupUsersController < ApplicationController
-  before_action :authenticate_user!
+class Public::GroupUsersController < Public::ApplicationController
 
   def index
     @group = Group.find(params[:group_id])
