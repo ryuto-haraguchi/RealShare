@@ -9,6 +9,7 @@ class Public::PostsController < Public::ApplicationController
     @post = Post.find(params[:id])
     @comment = Comment.new
     @comments = @post.comments
+    @bookmark = @post.bookmarks.find_by(user_id: current_user.id) 
   end
 
   def new

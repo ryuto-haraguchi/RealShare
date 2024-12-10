@@ -5,6 +5,7 @@ class Post < ApplicationRecord
   belongs_to :user
   has_many :comments, dependent: :destroy
   has_many :bookmarks, dependent: :destroy
+  has_many :bookmark_users, through: :bookmarks, source: :user
   has_many :reviews, dependent: :destroy
   has_many :received_notices, as: :noticeable, class_name: 'Notice', dependent: :destroy
 
@@ -26,6 +27,10 @@ class Post < ApplicationRecord
 
   def full_address
     "#{prefecture}#{city}#{town}"
+  end
+
+  def bookmarked_by?(user)
+    bookmark_users.include?(user)
   end
   
 end
