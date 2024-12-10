@@ -40,6 +40,13 @@
         <%= link_to "削除", admin_post_path(post), method: :delete, class: "btn btn-danger" %>
       </div>
     </div>
+  <% elsif post.user = current_user %>
+    <div class="row mb-5">
+      <div class="col d-flex justify-content-end">
+        <%= link_to "編集", edit_post_path(post), class: "btn btn-success mr-3" %>
+        <%= link_to "削除", post_path(post), method: :delete, class: "btn btn-danger" %>
+      </div>
+    </div>
   <% end %>
 </div>
 

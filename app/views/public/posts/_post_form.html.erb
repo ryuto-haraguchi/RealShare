@@ -1,0 +1,91 @@
+<div class="container mt-5">
+<% if post.errors.any? %>
+  <div class="alert alert-danger">
+    <ul>
+      <% post.errors.full_messages.reject { |msg| msg.include?("緯度") || msg.include?("経度") }.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+    </ul>
+  </div>
+<% end %>
+  <div class="row">
+    <div class="col-6 offset-3 text-center">
+      <% if controller.action_name == "new" || controller.action_name == "create" %>
+        <h2>投稿作成</h2>
+      <% elsif controller.action_name == "edit" || controller.action_name == "update" %>
+        <h2>投稿編集</h2>
+      <% end %>
+    </div>
+  </div>
+  <%= form_with model: post, local: true do |f| %>
+    <div class="row mt-5">
+      <div class="col-6">
+        <div class="row mt-3">
+          <div class="col offset-1">
+            <%= f.label :category, "カテゴリ" %>
+          </div>
+          <div class="col">
+            <%= f.select :category, options_for_select(Post.categories.keys.map { |key| [I18n.t("enums.post.category.#{key}"), key] }) %>
+          </div>
+        </div>
+        <div class="row mt-3">
+          <div class="col offset-1">
+            <%= f.label :prefecture, "都道府県" %>
+          </div>
+          <div class="col">
+            <%= f.text_field :prefecture %>
+          </div>
+        </div>
+        <div class="row mt-3">
+          <div class="col offset-1">
+            <%= f.label :city, "市区町村" %>
+          </div>
+          <div class="col">
+            <%= f.text_field :city %>
+          </div>
+        </div>
+        <div class="row mt-3">
+          <div class="col offset-1">
+            <%= f.label :town, "町名まで" %>
+          </div>
+          <div class="col">
+            <%= f.text_field :town %>
+          </div>
+        </div>
+        <!-- 取引価格 -->
+        <div class="row mt-3">
+          <div class="col offset-1">
+            <%= f.label :price, "取引価格" %>
+          </div>
+          <div class="col">
+            <%= f.number_field :price %>
+          </div>
+        </div>
+        <!-- 取引時期 -->
+        <div class="row mt-3">
+          <div class="col offset-1">
+            <%= f.label :timing, "取引時期" %>
+          </div>
+          <div class="col">
+            <%= f.date_field :timing %>
+          </div>
+        </div>
+      </div>
+      <div class="col-6 p-0">
+        <div class="border rounded">
+          <%= f.text_field :title, placeholder: "タイトルを入力してください", class: "form-control-plaintext border-bottom pl-2" %>
+        </div>
+        <div class="border rounded" style="height: 200px;">
+          <%= f.text_area :content, placeholder: "本文を入力してください", class: "form-control-plaintext border-0 pl-2 h-100" %>
+        </div>
+        <div class="d-flex justify-content-end">
+          <% if controller.action_name == "new" || controller.action_name == "create" %>
+            <%= f.submit "投稿する", class: "btn btn-primary mt-3" %>
+          <% elsif controller.action_name == "edit" || controller.action_name == "update" %>
+            <%= f.submit "更新する", class: "btn btn-primary mt-3" %>
+          <% end %>
+        </div>
+      </div>
+    </div>
+  <% end %>
+</div>
