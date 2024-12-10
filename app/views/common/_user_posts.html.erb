@@ -15,6 +15,7 @@
         <div class="d-flex align-items-center">
           <span class="mr-2"><%= post.full_address %></span>
           <% if post.user == current_user %>
+            <span><%= link_to "編集", edit_post_path(post), class: "btn btn-success mr-3" %></span>
             <span><%= link_to "削除", post_path(post), method: :delete, data: { confirm: "本当に削除しますか？" }, class: "btn btn-danger" %></span>
           <% elsif admin_namespace? %>
             <span><%= link_to "削除", admin_post_path(post), method: :delete, data: { confirm: "本当に削除しますか？" }, class: "btn btn-danger" %></span>

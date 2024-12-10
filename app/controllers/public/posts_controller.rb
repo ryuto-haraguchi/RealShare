@@ -25,6 +25,20 @@ class Public::PostsController < Public::ApplicationController
     end
   end
 
+  def edit
+    @post = Post.find(params[:id])
+  end
+
+  def update
+    @post = Post.find(params[:id])
+    if @post.update(post_params)
+      flash[:notice] = "投稿を更新しました"
+      redirect_to post_path(@post)
+    else
+      render :edit
+    end
+  end
+
   def destroy
     @post = Post.find(params[:id])
     @post.destroy
@@ -34,7 +48,7 @@ class Public::PostsController < Public::ApplicationController
   private
 
   def post_params
-    params.require(:post).permit(:title, :content, :category, :prefecture, :city, :town, :latitude, :longitude).merge(user_id: current_user.id)
+    params.require(:post).permit(:title, :content, :category, :price, :timing, :prefecture, :city, :town, :latitude, :longitude).merge(user_id: current_user.id)
   end
   
 end

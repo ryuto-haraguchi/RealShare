@@ -21,6 +21,11 @@ ja:
         category: "カテゴリー"
         status: "ステータス"
         user_id: "ユーザーID"
+        prefecture: "都道府県"
+        city: "市区町村"
+        town: "町名"
+        latitude: "緯度"
+        longitude: "経度"
       user:
         name: "ユーザーネーム"
         email: "メールアドレス"
@@ -35,6 +40,13 @@ ja:
         restrict_dependent_destroy:
           has_one: "%{record}が存在しているので削除できません"
           has_many: "%{record}が存在しているので削除できません"
+      models:
+        post:
+          attributes:
+            latitude:
+              blank: ""
+            longitude:
+              blank: ""
   date:
     abbr_day_names:
     - 日
