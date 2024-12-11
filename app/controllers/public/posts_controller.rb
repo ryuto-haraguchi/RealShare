@@ -2,7 +2,10 @@ class Public::PostsController < Public::ApplicationController
   skip_before_action :restrict_guest_user, only: [:index]
 
   def index
-    @posts = Post.all.page(params[:page]).per(5).order(created_at: :desc)
+    @posts = Post.all
+    @posts = @posts.where(category: params[:category]) if params[:category].present?
+    @posts = @posts.where(prefecture: params[:prefecture]) if params[:prefecture].present?
+    @posts = @posts.page(params[:page]).per(5).order(created_at: :desc)
   end
 
   def show
