@@ -3,9 +3,21 @@ class Public::PostsController < Public::ApplicationController
 
   def index
     @posts = Post.all
+    #フィルター機能
     @posts = @posts.where(category: params[:category]) if params[:category].present?
     @posts = @posts.where(prefecture: params[:prefecture]) if params[:prefecture].present?
-    @posts = @posts.page(params[:page]).per(5).order(created_at: :desc)
+    # ソート機能（デフォルトを設定し、動的に変更）
+    sort_order = case params[:sort]
+    when "new"
+      { created_at: :desc }
+    when "old"
+      { created_at: :asc }
+    else
+      { created_at: :desc } # デフォルトは新しい順
+    end
+    @posts = @posts.order(sort_order)
+    #ページネーション付与
+    @posts = @posts.page(params[:page]).per(5)
   end
 
   def show
