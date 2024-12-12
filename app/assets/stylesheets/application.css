@@ -103,3 +103,8 @@ body {
 .field_with_errors {
   display: contents; 
 }
+
+#map {
+  width: 100%;
+  height: calc(100vh - 80px - 80px);
+}
