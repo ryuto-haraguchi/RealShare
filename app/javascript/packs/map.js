@@ -43,7 +43,6 @@ async function initMap() {
         position: { lat: latitude, lng: longitude },
         map,
         title: town,
-        maxWidth: 400,
       });
 
       // 投稿一覧を情報ウィンドウに表示
