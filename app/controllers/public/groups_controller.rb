@@ -7,6 +7,8 @@ class Public::GroupsController < Public::ApplicationController
 
   def show
     @group = Group.find(params[:id])
+    @posts = @group.posts.order(created_at: :desc).page(params[:page]).per(5)
+    @bookmark = current_user.bookmarks.where(post_id: @posts.pluck(:id))
   end
 
   def new
