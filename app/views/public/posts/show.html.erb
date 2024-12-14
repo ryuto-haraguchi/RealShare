@@ -1,11 +1,9 @@
 <%= render 'common/post_card', post: @post, bookmark: @bookmark %>
 <%= render 'common/post_comments_field', post: @post, comments: @comments %>
 
-<div class="container">
-  <div class="row mt-5 mb-5">
-    <div class="col-12 text-center">
-      MAPデータ導入予定
-    </div>
-  </div>
+<div class="container mt-3">
+  <div id="map-show" data-post-id="<%= @post.id %>"></div>
 </div>
+
+<%= javascript_pack_tag 'map_show', 'data-turbolinks-track': 'reload' %>
 
