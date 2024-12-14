@@ -20,7 +20,11 @@ class User < ApplicationRecord
   validates :prefecture, presence: true
   validates :city, presence: true
   validates :town, presence: true
+  validates :latitude, presence: true
+  validates :longitude, presence: true
 
+  geocoded_by :full_address
+  before_validation :geocode
   def get_profile_image(width, height)
     unless profile_image.attached?
       file_path = Rails.root.join('app/assets/images/no_image.jpg')
@@ -46,5 +50,9 @@ class User < ApplicationRecord
   end
 
   scope :excluding_guest, -> { where.not(email: GUEST_USER_EMAIL) }
+
+  def full_address
+    "#{prefecture}#{city}#{town}"
+  end
 
 end

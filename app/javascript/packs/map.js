@@ -6,7 +6,10 @@
 let map;
 
 async function initMap() {
-  const myLatLng = { lat: 35.681236, lng: 139.767125 };
+  const response = await fetch('/maps.json');
+  if (!response.ok) throw new Error('ネットワーク応答が正常ではありません');
+  const { currentUserLatitude, currentUserLongitude, currentUserName } = await response.json(); 
+  const myLatLng = { lat: currentUserLatitude, lng: currentUserLongitude };
   const { Map } = await google.maps.importLibrary("maps");
   const { AdvancedMarkerElement } = await google.maps.importLibrary("marker")
 
@@ -14,6 +17,17 @@ async function initMap() {
     center: myLatLng,
     zoom: 15,
     mapId: "593d758e31ac8c1b",
+  });
+
+  const userTag = document.createElement("div");
+
+  userTag.className = "user-tag";
+  userTag.textContent = currentUserName;
+
+  const marker = new AdvancedMarkerElement({
+    position: myLatLng,
+    map,
+    content: userTag,
   });
 
   try{

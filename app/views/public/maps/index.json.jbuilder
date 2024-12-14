@@ -9,5 +9,8 @@ json.items do
     json.latitude post.latitude
     json.longitude post.longitude
     json.createdAt l(post.created_at, format: :long)
-  end  
+  end 
 end
+json.currentUserLatitude current_user.latitude
+json.currentUserLongitude current_user.longitude
+json.currentUserName current_user.name

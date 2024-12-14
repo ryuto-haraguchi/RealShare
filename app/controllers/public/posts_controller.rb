@@ -24,7 +24,12 @@ class Public::PostsController < Public::ApplicationController
     @post = Post.find(params[:id])
     @comment = Comment.new
     @comments = @post.comments
-    @bookmark = @post.bookmarks.find_by(user_id: current_user.id) 
+    @bookmark = @post.bookmarks.find_by(user_id: current_user.id)
+
+    respond_to do |format|
+      format.html
+      format.json 
+    end
   end
 
   def new

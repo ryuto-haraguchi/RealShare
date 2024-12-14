@@ -6,7 +6,6 @@ class Post < ApplicationRecord
   has_many :comments, dependent: :destroy
   has_many :bookmarks, dependent: :destroy
   has_many :bookmark_users, through: :bookmarks, source: :user
-  has_many :reviews, dependent: :destroy
   has_many :received_notices, as: :noticeable, class_name: 'Notice', dependent: :destroy
 
   validates :title, presence: true
@@ -30,7 +29,7 @@ class Post < ApplicationRecord
   end
 
   def bookmarked_by?(user)
-    bookmark_users.include?(user)
+    bookmarks.exists?(user_id: user.id)
   end
   
 end
