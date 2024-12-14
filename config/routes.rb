@@ -12,7 +12,9 @@ Rails.application.routes.draw do
 
   namespace :admin do
 
-    root to: 'homes#top'
+    devise_scope :admin do
+      root to: 'sessions#new'
+    end
 
     get 'top' => 'homes#top'
 

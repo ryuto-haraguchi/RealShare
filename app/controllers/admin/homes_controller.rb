@@ -1,4 +1,4 @@
-class Admin::HomesController < ApplicationController
+class Admin::HomesController < Admin::ApplicationController
 
   def top
     @previous_day_registration_users = User.where(created_at: Time.zone.yesterday.all_day)
