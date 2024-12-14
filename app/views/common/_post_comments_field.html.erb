@@ -15,30 +15,34 @@
           <% comments.each do |comment| %>
             <div class="card-body border-top d-flex">
               <div class="mr-4">
-          <%= image_tag comment.user.get_profile_image(50,50) %>
+                <%= image_tag comment.user.get_profile_image(50,50) %>
               </div>
               <div class="row">
-          <div class="col-12">
-            <% if public_namespace? %>
-              <%= link_to comment.user.name, user_path(comment.user), class: "border-bottom text-dark text-decoration-none"%>
-            <% elsif admin_namespace? %>
-              <%= link_to comment.user.name, admin_user_path(comment.user), class: "border-bottom text-dark text-decoration-none"%>
-            <% end %>
-          </div>
-          <div class="col-12">
-            <%= comment.content %>
-            <% if public_namespace? %>
-              <% if comment.user == current_user %>
-                <span class="ml-5">
-                  <%= link_to "削除", post_comment_path(post, comment), method: :delete, data: { confirm: "本当に削除しますか？" }, class: "btn btn-danger" %>
-                </span>
-              <% end %>
-            <% elsif admin_namespace? %>
-                 <span class="ml-5">
-                  <%= link_to "削除", admin_comment_path(comment), method: :delete, data: { confirm: "本当に削除しますか？" }, class: "btn btn-danger" %>
-                </span>
-            <% end %>
-          </div>
+                <div class="col-12">
+                  <% if public_namespace? %>
+                    <%= link_to comment.user.name, user_path(comment.user), class: "border-bottom text-dark text-decoration-none"%>
+                  <% elsif admin_namespace? %>
+                    <%= link_to comment.user.name, admin_user_path(comment.user), class: "border-bottom text-dark text-decoration-none"%>
+                  <% end %>
+                </div>
+                <div class="col-12">
+                  <%= comment.content %>
+                  <% if public_namespace? %>
+                    <% if comment.user == current_user %>
+                      <span class="ml-5">
+                        <%= link_to "削除", post_comment_path(post, comment), method: :delete, data: { confirm: "本当に削除しますか？" }, class: "btn btn-danger" %>
+                      </span>
+                    <% else %>
+                      <span class="ml-5">
+                        <%= link_to "通報する", new_notice_path(noticeable_type: Comment, noticeable_id: comment.id), class: "btn btn-danger" %>
+                      </span>
+                    <% end %>
+                  <% elsif admin_namespace? %>
+                      <span class="ml-5">
+                        <%= link_to "削除", admin_comment_path(comment), method: :delete, data: { confirm: "本当に削除しますか？" }, class: "btn btn-danger" %>
+                      </span>
+                  <% end %>
+                </div>
               </div>
             </div>
           <% end %>
