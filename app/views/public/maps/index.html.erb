@@ -1,10 +1,5 @@
-<%= content_for :css do %>
-  <%= stylesheet_link_tag 'public/posts/posts', media: 'all', 'data-turbolinks-track': 'reload' %>
-<% end %>
-
 <div class="container">
   <div id="map"></div>
 </div>
 
 <%= javascript_pack_tag 'map', 'data-turbolinks-track': 'reload' %>
-<%= javascript_pack_tag 'posts/category_switch' %>
