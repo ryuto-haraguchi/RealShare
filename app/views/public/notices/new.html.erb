@@ -1,0 +1,30 @@
+<div class="container mt-5">
+  <div class="row">
+    <div class="col-6 offset-3 text-center text-danger"> 
+      <h3>通報内容</h3>
+    </div>
+  </div>
+    <div class="row">
+      <div class="col-12">
+        <div class="mb-3 text-danger">
+          <% if @noticeable.is_a?(Post) %>
+            通報対象の投稿: <%= @noticeable.title %>
+          <% elsif @noticeable.is_a?(User) %>
+            通報対象のユーザー: <%= @noticeable.name %>
+          <% elsif @noticeable.is_a?(Comment) %>
+            通報対象のコメント: <%= @noticeable.content %>
+          <% end %>
+        </div>
+        <%= form_with model: @notice, local: true do |f| %>
+          <%= f.hidden_field :noticeable_type, value: @noticeable.class.name %>
+          <%= f.hidden_field :noticeable_id, value: @noticeable.id %>
+          <div style="height: 300px;">
+            <%= f.text_area :reason, class: "form-control h-100" %>
+          </div>
+          <div class="text-center mt-3">
+            <%= f.submit "通報する", class: "btn btn-danger" %>
+          </div>
+        <% end %>
+      </div>
+    </div>
+</div>
