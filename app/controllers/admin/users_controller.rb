@@ -2,6 +2,9 @@ class Admin::UsersController < ApplicationController
 
   def index
     @users = User.excluding_guest
+    if params[:filter].present?
+      @users = @users.get_by_filter(params[:filter])
+    end
   end
 
   def show
