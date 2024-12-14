@@ -1,10 +1,10 @@
-class Admin::NoticesController < ApplicationController
+class Admin::NoticesController < Admin::ApplicationController
 
   def index
     if params[:notices_ids].present?
-      @notices = Notice.where(id: params[:notices_ids])
+      @notices = Notice.where(id: params[:notices_ids]).order(created_at: :desc).page(params[:page]).per(10)
     else
-      @notices = Notice.all
+      @notices = Notice.all.order(created_at: :desc).page(params[:page]).per(10)
     end
   end
 
