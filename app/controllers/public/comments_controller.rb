@@ -1,4 +1,5 @@
 class Public::CommentsController < Public::ApplicationController
+  before_action :permission_confirmation, only: [:destroy]
 
   def create
     @comment = Comment.new(comment_params)
@@ -21,6 +22,14 @@ class Public::CommentsController < Public::ApplicationController
 
   def comment_params
     params.require(:comment).permit(:user_id, :post_id, :content)
+  end
+
+  def permission_confirmation
+    user = Comment.find(params[:id]).user
+    unless user.id == current_user.id
+      flash[:alert] = "他のユーザーのコメントは削除できません"
+      redirect_to mypage_users_path
+    end
   end
 
 end

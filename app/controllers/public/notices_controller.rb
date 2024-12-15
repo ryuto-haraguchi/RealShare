@@ -1,4 +1,4 @@
-class Public::NoticesController < ApplicationController
+class Public::NoticesController < Public::ApplicationController
 
   def new
     @notice = Notice.new
