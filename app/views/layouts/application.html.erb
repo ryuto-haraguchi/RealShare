@@ -12,11 +12,11 @@
     <%= yield :css %>
   </head>
 
-  <header class="header">
-    <%= render 'layouts/header' %>
-  </header>
-
   <body>
+    <header class="header">
+      <%= render 'layouts/header' %>
+    </header>
+
     <div class="container mt-3">
       <div class="row">
         <% if flash[:notice] %>
@@ -38,6 +38,8 @@
     <footer class="footer">
       <%= render 'layouts/footer' %>
     </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/jquery-jpostal-ja@2.14.45/jquery.jpostal.min.js"></script>
   </body>
 
 </html>

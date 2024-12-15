@@ -30,10 +30,19 @@
 
       <div class="row mt-3">
         <div class="col-3 offset-3">
+          <%= f.label :zipcode, "郵便番号検索", class: "label" %>
+        </div>
+        <div class="col-3">
+          <%= text_field_tag :zipcode %>
+        </div>
+      </div>
+
+      <div class="row mt-3">
+        <div class="col-3 offset-3">
         <%= f.label :prefecture, "お住まいの地域(都道府県)", class: "label" %>
         </div>
         <div class="col-3">
-        <%= f.text_field :prefecture, placeholder: "東京都" %>
+        <%= f.text_field :prefecture, id: "prefecture", placeholder: "東京都" %>
         </div>
       </div>
 
@@ -42,7 +51,7 @@
         <%= f.label :city, "お住まいの地域(市区町村)", class: "label" %>
         </div>
         <div class="col-3">
-        <%= f.text_field :city, placeholder: "港区" %>
+        <%= f.text_field :city, id: "city", placeholder: "港区" %>
         </div>
       </div>
 
@@ -51,7 +60,7 @@
         <%= f.label :town, "お住まいの地域(町名まで)", class: "label" %>
         </div>
         <div class="col-3">
-        <%= f.text_field :town, placeholder: "六本木" %>
+        <%= f.text_field :town, id: "town", placeholder: "六本木" %>
         </div>
       </div>
 
@@ -92,3 +101,5 @@
     </div>
   </div>
 <% end %>
+
+<%= javascript_pack_tag "jpostal",  'data-turbolinks-track': 'reload' %>
