@@ -1,5 +1,6 @@
 class Public::GroupsController < Public::ApplicationController
   skip_before_action :restrict_guest_user, only: [:index]
+  before_action :permission_confirmation, only: [:update, :edit, :destroy]
 
   def index
     @groups = Group.all
@@ -57,6 +58,14 @@ class Public::GroupsController < Public::ApplicationController
 
   def group_params
     params.require(:group).permit(:name, :description)
+  end
+
+  def permission_confirmation
+    user = Group.find(params[:id]).owner
+    unless user.id == current_user.id
+      flash[:alert] = "グループオーナー以外は編集できません"
+      redirect_to mypage_users_path
+    end
   end
 
 end

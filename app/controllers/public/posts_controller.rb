@@ -1,5 +1,6 @@
 class Public::PostsController < Public::ApplicationController
   skip_before_action :restrict_guest_user, only: [:index]
+  before_action :permission_confirmation, only: [:update, :edit, :destroy]
 
   def index
     @posts = Post.all
@@ -70,6 +71,14 @@ class Public::PostsController < Public::ApplicationController
 
   def post_params
     params.require(:post).permit(:title, :content, :category, :price, :timing, :prefecture, :city, :town, :latitude, :longitude).merge(user_id: current_user.id)
+  end
+
+  def permission_confirmation
+    user = Post.find(params[:id]).user
+    unless user.id == current_user.id
+      flash[:alert] = "他のユーザーの情報は編集できません"
+      redirect_to mypage_users_path
+    end
   end
   
 end

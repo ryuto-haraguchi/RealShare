@@ -1,7 +1,7 @@
 class Public::SearchesController < Public::ApplicationController
   skip_before_action :restrict_guest_user, only: [:index]
+  
   def index
-
     if params[:keyword].present?
       @posts = Post.where('title LIKE :keyword OR content LIKE :keyword', keyword: "%#{params[:keyword]}%").page(params[:page]).per(5).order(created_at: :desc)
       if @posts.blank?
