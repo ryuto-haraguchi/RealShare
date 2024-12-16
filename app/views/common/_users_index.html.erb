@@ -15,8 +15,9 @@
         <% end %>
       </div>
     <% end %>
-    <table class="table">
-      <thead class="d-none d-md-block">
+  <%# ここからPCレイアウト %>
+    <table class="table d-none d-md-table">
+      <thead>
         <tr>
           <th></th> <%# プロフィールイメージ %>
           <th class="text-center">ユーザーネーム</th>
@@ -28,17 +29,17 @@
       <tbody>
         <% users.each do |user| %>
           <tr>
-            <td class="col-1 col-md-2 text-center"><%= image_tag user.get_profile_image(50, 50) %></td>
-            <td class="col-8 col-md-3 text-center align-middle">
+            <td class="col-md-2 text-center"><%= image_tag user.get_profile_image(50, 50) %></td>
+            <td class="col-md-3 text-center align-middle">
               <% if public_namespace? %>
                 <%= link_to user.name, user_path(user), class: "text-secondary" %>
               <% elsif admin_namespace? %>
                 <%= link_to user.name, admin_user_path(user), class: "text-secondary" %>
               <% end %>
             </td>
-            <td class="col-3 col-md-3 text-center align-middle"><%= user.prefecture %></td>
-            <td class="col-md-2 text-center align-middle d-none d-md-block"><%= user.posts.count %></td>
-            <td class="col-md-2 text-center align-middle d-none d-md-block">
+            <td class="col-md-3 text-center align-middle"><%= user.prefecture %></td>
+            <td class="col-md-2 text-center align-middle"><%= user.posts.count %></td>
+            <td class="col-md-2 text-center align-middle">
               <% if public_namespace? %>
                 <% if user.is_public == true %>
                   <i class="fa-solid fa-unlock"></i>
@@ -57,5 +58,32 @@
         <% end %>
       </tbody>
     </table>
+  <%# ここからスマホレイアウト %>
+    <% users.each do |user| %>
+      <div class="card col-12 d-md-none">
+        <div class="card-body row align-items-center p-0">
+          <%= image_tag user.get_profile_image(50,50), class: "col-3 px-0" %>
+        <% if public_namespace? %>
+          <%= link_to user.name, user_path(user), class: "text-secondary col-5 px-0 text-center" %>
+        <% elsif admin_namespace? %>
+          <%= link_to user.name, admin_user_path(user), class: "text-secondary col-5 px-0 text-center" %>
+        <% end %>
+          <div class="col-2 px-0 text-center"><%= user.prefecture %></div>
+        <% if public_namespace? %>
+          <% if user.is_public == true %>
+            <div class="col-2 px-0 text-center"><i class="fa-solid fa-unlock"></i></div>
+          <% else %>
+            <i class="fa-solid fa-lock"></i>
+          <% end %>
+        <% elsif admin_namespace? %>
+          <% if user.is_public? %>
+            登録中
+          <% else %>
+            退会済
+          <% end %>
+        <% end %>
+        </div>
+      </div>
+    <% end %>
   </div>
 </div>
