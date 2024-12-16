@@ -1,14 +1,10 @@
-<% content_for :css do%>
-  <%= stylesheet_link_tag 'public/users/index', media: 'all', 'data-turbolinks-track': 'reload' %>
-<% end %>
-
 <div class="container">
   <div class="row mt-4">
-    <div class="col-6 offset-3 text-center mb-3">
+    <div class="col-md-6 offset-md-3 text-center mb-3">
       <h2>ユーザー <i class="fa-duotone fa-solid fa-users"></i> 一覧</h2>
     </div>
     <% if public_namespace? %>
-      <div class="col-3 ">
+      <div class="col-md-3">
         <%= form_with url: searches_path, method: :get, local: true do |f| %>
           <div class="input-group mb-3">
             <%= f.text_field :user_name, placeholder: "ユーザーネーム", class: "form-control", value: params[:user_name] %>
@@ -20,7 +16,7 @@
       </div>
     <% end %>
     <table class="table">
-      <thead>
+      <thead class="d-none d-md-block">
         <tr>
           <th></th> <%# プロフィールイメージ %>
           <th class="text-center">ユーザーネーム</th>
@@ -32,17 +28,17 @@
       <tbody>
         <% users.each do |user| %>
           <tr>
-            <td class="col-2 text-center"><%= image_tag user.get_profile_image(50, 50) %></td>
-            <td class="col-3 text-center align-middle">
+            <td class="col-1 col-md-2 text-center"><%= image_tag user.get_profile_image(50, 50) %></td>
+            <td class="col-8 col-md-3 text-center align-middle">
               <% if public_namespace? %>
                 <%= link_to user.name, user_path(user), class: "text-secondary" %>
               <% elsif admin_namespace? %>
                 <%= link_to user.name, admin_user_path(user), class: "text-secondary" %>
               <% end %>
             </td>
-            <td class="col-3 text-center align-middle"><%= user.prefecture %></td>
-            <td class="col-2 text-center align-middle"><%= user.posts.count %></td>
-            <td class="col-2 text-center align-middle">
+            <td class="col-3 col-md-3 text-center align-middle"><%= user.prefecture %></td>
+            <td class="col-md-2 text-center align-middle d-none d-md-block"><%= user.posts.count %></td>
+            <td class="col-md-2 text-center align-middle d-none d-md-block">
               <% if public_namespace? %>
                 <% if user.is_public == true %>
                   <i class="fa-solid fa-unlock"></i>

@@ -7,102 +7,100 @@
   <div class="container mt-5">
     <div class="row">
       <div class="col-6 offset-3 text-center">
-        <h2 class="sign-up-title">登録情報の編集</h2>
+        <h2 class="sign-up-title">新規登録</h2>
       </div>
     </div>
 
     <div class="row mt-5">
-      <div class="col-3 offset-3">
-        <%= f.label :profile_image, "画像", class: "label" %>
-      </div>
-      <div class="col-3">
-        <%= f.file_field :profile_image %>
-      </div>
-    </div>
-
-
-    <div class="row mt-3">
-      <div class="col-3 offset-3">
+      <div class="col-md-3 offset-md-3 text-center">
         <%= f.label :name, "ユーザーネーム", class: "label" %>
       </div>
-      <div class="col-3">
-        <%= f.text_field :name %>
+      <div class="col-md-3 text-center">
+        <%= f.text_field :name, placeholder: "地域太郎" %>
       </div>
     </div>
 
     <div class="row mt-3">
-      <div class="col-3 offset-3">
+      <div class="col-md-3 offset-md-3 text-center">
         <%= f.label :email, "メールアドレス", class: "label" %>
       </div>
-      <div class="col-3">
-        <%= f.email_field :email %>
+      <div class="col-md-3 text-center">
+        <%= f.email_field :email, placeholder: "chiiki@example.com" %>
       </div>
     </div>
 
     <div class="row mt-3">
-      <div class="col-3 offset-3">
-      <%= f.label :prefecture, "お住まいの地域(都道府県)", class: "label" %>
+      <div class="col-md-3 offset-md-3 text-center">
+        <%= f.label :zipcode, "郵便番号検索", class: "label" %>
       </div>
-      <div class="col-3">
-      <%= f.text_field :prefecture %>
-      </div>
-    </div>
-
-    <div class="row mt-3">
-      <div class="col-3 offset-3">
-      <%= f.label :city, "お住まいの地域(市区町村)", class: "label" %>
-      </div>
-      <div class="col-3">
-      <%= f.text_field :city %>
+      <div class="col-md-3 text-center">
+        <%= text_field_tag :zipcode %>
       </div>
     </div>
 
     <div class="row mt-3">
-      <div class="col-3 offset-3">
-      <%= f.label :town, "お住まいの地域(町名まで)", class: "label" %>
+      <div class="col-md-3 offset-md-3 text-center">
+        <%= f.label :prefecture, "お住まいの地域(都道府県)", class: "label" %>
       </div>
-      <div class="col-3">
-      <%= f.text_field :town %>
+      <div class="col-md-3 text-center">
+        <%= f.text_field :prefecture, id: "prefecture", placeholder: "東京都" %>
       </div>
     </div>
 
     <div class="row mt-3">
-      <div class="col-3 offset-3">
-        <%= f.label :password, "新しいパスワード", class: "label" %>
+      <div class="col-md-3 offset-md-3 text-center">
+        <%= f.label :city, "お住まいの地域(市区町村)", class: "label" %>
+      </div>
+      <div class="col-md-3 text-center">
+        <%= f.text_field :city, id: "city", placeholder: "港区" %>
+      </div>
+    </div>
+
+    <div class="row mt-3">
+      <div class="col-md-3 offset-md-3 text-center">
+        <%= f.label :town, "お住まいの地域(町名まで)", class: "label" %>
+      </div>
+      <div class="col-md-3 text-center">
+        <%= f.text_field :town, id: "town", placeholder: "六本木" %>
+      </div>
+    </div>
+
+    <div class="row mt-3">
+      <div class="col-md-3 offset-md-3 text-center">
+        <%= f.label :password, class: "label" %>
         <% if @minimum_password_length %>
           <em class="label">(<%= @minimum_password_length %>文字以上)</em>
         <% end %>
       </div>
-      <div class="col-3">
+      <div class="col-md-3 text-center">
         <%= f.password_field :password, autocomplete: "new-password" %>
       </div>
     </div>
 
     <div class="row mt-3">
-      <div class="col-3 offset-3">
-        <%= f.label :password_confirmation, "新しいパスワード（確認用）", class: "label" %>
+      <div class="col-md-3 offset-md-3 text-center">
+        <%= f.label :password_confirmation, class: "label" %>
       </div>
-      <div class="col-3">
+      <div class="col-md-3 text-center">
         <%= f.password_field :password_confirmation, autocomplete: "new-password" %>
-      </div>
-    </div>
-
-    <div class="row mt-3">
-      <div class="col-3 offset-3">
-        <%= f.label :current_password, "現在のパスワード", class: "label" %>
-      </div>
-      <div class="col-3">
-        <%= f.password_field :current_password, autocomplete: "current-password" %>
       </div>
     </div>
 
     <div class="row mt-5">
       <div class="col-6 offset-3 text-center">
         <div class="actions">
-          <%= f.submit "更新", class: "btn btn-sign-up" %>
+          <%= f.submit "登録", class: "btn btn-sign-up" %>
         </div>
       </div>
     </div>
+
+    <div class="row mt-3 mb-5">
+      <div class="col-md-6 offset-md-3 text-center">
+        すでにアカウントをお持ちですか？<br>
+        <%= render "public/shared/links" %>
+      </div>
+    </div>
+  </div>
 
     <div class="row mt-3 mb-5">
       <div class="col-6 offset-3 text-center">

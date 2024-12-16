@@ -142,3 +142,24 @@ body {
   border-right: 8px solid transparent;
   border-top: 8px solid #4285F4;
 }
+
+@media screen and (max-width: 375px) {
+  .header {
+    height: 60px;
+    padding: 0px;
+  }
+
+  .header .fa-house {
+    font-size: 40px;
+    margin-top: 7px;
+  }
+
+  .header .logo-title {
+    font-size: 30px;
+  }
+
+  .footer {
+    height: 60px;
+    padding: 0px;
+  }
+}

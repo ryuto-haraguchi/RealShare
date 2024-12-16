@@ -4,10 +4,6 @@
   margin: 40px 0 0 40px;
 }
 
-.container-top {
-  margin-top: 100px;
-}
-
 .btn-sign-up {
   background-color: darkcyan;
   color: white;
@@ -29,4 +25,12 @@
 
 .btn:hover {
   color: white;
+}
+
+@media screen and (max-width: 375px) {
+  .title {
+    font-size: 25px;
+    margin-top: 20px;
+    margin-bottom: 50px;
+  }
 }
