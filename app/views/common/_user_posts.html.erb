@@ -1,26 +1,25 @@
+<%= stylesheet_link_tag 'public/post_btn', media: 'all', 'data-turbo-track': 'reload'%>
 <% if @posts.any? %>
   <% @posts.each do |post| %>
-    <div class="card mb-4">
-      <div class="card-header">
-        <span class="category-item d-inline-block text-center" data-category="<%= post.category_before_type_cast %>">
+    <div class="card col-12 mb-4">
+      <div class="card-header row align-items-center">
+        <span class="category-item text-center" data-category="<%= post.category_before_type_cast %>">
           <%= post.category_i18n %>
         </span>
         <strong class="ml-3"><%= link_to post.title, post_path(post), class: "text-dark" %></strong>
       </div>
-      <div class="card-body">
-        <p class="card-text"><%= post.content %></p>
+      <div class="card-body row">
+        <p class="card-text"><%= post.content%></p>
       </div>
-      <div class="card-footer text-muted d-flex justify-content-between align-items-center">
-        <span><%= l(post.created_at, format: :long) %></span>
-        <div class="d-flex align-items-center">
-          <span class="mr-2"><%= post.full_address %></span>
-          <% if post.user == current_user %>
-            <span><%= link_to "編集", edit_post_path(post), class: "btn btn-success mr-3" %></span>
-            <span><%= link_to "削除", post_path(post), method: :delete, data: { confirm: "本当に削除しますか？" }, class: "btn btn-danger" %></span>
-          <% elsif admin_namespace? %>
-            <span><%= link_to "削除", admin_post_path(post), method: :delete, data: { confirm: "本当に削除しますか？" }, class: "btn btn-danger" %></span>
-          <% end %>
-        </div>
+      <div class="card-footer row px-0 text-muted pb-1 pb-md-3">
+        <span class="col-12 col-md-0"><%= l(post.created_at, format: :long) %></span>
+        <span class="col-12 d-flex align-items-center col-md-6"><%= post.full_address %></span>
+        <% if post.user == current_user %>
+          <span class="col-6 col-md-2 text-right offset-md-2"><%= link_to "編集", edit_post_path(post), class: "btn btn-success" %></span>
+          <span class="col-6 col-md-2 text-md-right"><%= link_to "削除", post_path(post), method: :delete, data: { confirm: "本当に削除しますか？" }, class: "btn btn-danger" %></span>
+        <% elsif admin_namespace? %>
+          <span><%= link_to "削除", admin_post_path(post), method: :delete, data: { confirm: "本当に削除しますか？" }, class: "btn btn-danger" %></span>
+        <% end %>
       </div>
     </div>
   <% end %>

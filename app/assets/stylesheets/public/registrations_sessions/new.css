@@ -16,3 +16,10 @@
 .btn:hover {
   color: white;
 }
+
+@media screen and (max-width: 375px) {
+  .sign-up-title {
+    font-size: 30px;
+  }
+  
+}

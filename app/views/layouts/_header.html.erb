@@ -7,13 +7,13 @@
           <span class="logo-title">RealShare</span>
         <% end %>
       </div>
-      <div class="d-flex align-items-center align-middle nav-box">
-        <nav class="navbar navbar-expand-lg custom-navbar">
-          <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" 
-                  aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-          </button>
-            <% if user_signed_in? %>
+      <% if user_signed_in? %>
+        <div class="d-flex align-items-center align-middle nav-box">
+          <nav class="navbar navbar-expand-lg custom-navbar">
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" 
+                    aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+              <span class="navbar-toggler-icon"></span>
+            </button>
             <div class="collapse navbar-collapse" id="navbarNav">
               <ul class="navbar-nav ms-auto">
                 <li class="nav-item">
@@ -43,9 +43,9 @@
                 </li>
               </ul>
             </div>
-            <% end %>
-        </nav>
-      </div> 
+          </nav>
+        </div>
+      <% end %>
     </div>
   </div>
 <% elsif admin_namespace? %>
