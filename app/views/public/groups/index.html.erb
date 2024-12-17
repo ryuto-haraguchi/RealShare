@@ -1,9 +1,10 @@
-<div class="container">
+<%# PCレイアウト %>
+<div class="container d-none d-md-block">
   <div class="row mt-4">
     <div class="col-6 offset-3 text-center mb-3">
       <h2>グループ一覧</h2>
     </div>
-    <div class="col-3 ">
+    <div class="col-3">
       <%= form_with url: searches_path, method: :get, local: true do |f| %>
         <div class="input-group mb-3">
           <%= f.text_field :group_name, placeholder: "グループ名", class: "form-control", value: params[:group_name] %>
@@ -13,6 +14,29 @@
         </div>
       <% end %>
     </div>
+  </div>
+  <%= render 'public/groups/group_index', groups: @groups %>
+</div>
+
+
+<%# スマホレイアウト %>
+
+<div class="container d-md-none">
+  <div class="row mt-4">
+    <div class="col-12 text-center mb-2">
+      <h2>グループ一覧</h2>
+    </div>
+  </div>
+  <div class="row">
+    <%= form_with url: searches_path, method: :get, local: true, class: "col-12" do |f| %>
+      <div class="input-group mb-3">
+        <%= f.text_field :group_name, placeholder: "グループ名", class: "form-control", value: params[:group_name] %>
+        <div class="input-group-append">
+          <%= f.submit "検索", class: "btn btn-outline-secondary" %>
+        </div>
+      </div>
+    <% end %>
+  </div>
     <%= render 'public/groups/group_index', groups: @groups %>
   </div>
 </div>
