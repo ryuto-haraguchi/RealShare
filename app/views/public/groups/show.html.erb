@@ -21,24 +21,27 @@
           <p class="mb-0 mt-3">メンバー数</p>
           <div><%= link_to @group.group_users.count, group_group_users_path(@group), class: "text-secondary" %></div>
         </div>
-        <div class="card-footer d-flex justify-content-between">
         <% if @group.owner == current_user %>
-          <%= link_to "編集", edit_group_path(@group), class: "btn btn-secondary" %>
-          <%= link_to "削除", group_path(@group), method: :delete, data: { confirm: "本当に削除しますか？" }, class: "btn btn-danger" %>
+          <div class="card-footer d-flex justify-content-between">
+            <%= link_to "編集", edit_group_path(@group), class: "btn btn-secondary" %>
+            <%= link_to "削除", group_path(@group), method: :delete, data: { confirm: "本当に削除しますか？" }, class: "btn btn-danger" %>
+          </div>
         <% else %>
-          <% if @group.user_joined?(current_user) %>
-            <%= link_to "退会する", group_leave_path(@group), method: :delete, data: { confirm: "本当に退会しますか？" }, class: "btn btn-danger" %>
-          <% else %>
-            <%= link_to "参加する", group_join_path(@group), method: :post, class: "btn btn-success" %>
-          <% end %>
+          <div class="card-footer text-center">
+            <% if @group.user_joined?(current_user) %>
+              <%= link_to "退会する", group_leave_path(@group), method: :delete, data: { confirm: "本当に退会しますか？" }, class: "btn btn-danger" %>
+            <% else %>
+              <%= link_to "参加する", group_join_path(@group), method: :post, class: "btn btn-success" %>
+            <% end %>
+          </div>
         <% end %>
         </div>
       </div>
-    </div>
-    <div class="col-8 offset-1">
-      <% @posts.each do |post| %>
-        <%= render 'common/post_card', post: post, bookmark: @bookmark %>
-      <% end %>
+      <div class="col-8 offset-1">
+        <% @posts.each do |post| %>
+          <%= render 'common/post_card', post: post, bookmark: @bookmark %>
+        <% end %>
+      </div>
     </div>
   </div>
 </div>
