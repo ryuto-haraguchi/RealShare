@@ -3,7 +3,7 @@ class Admin::UsersController < Admin::ApplicationController
   def index
     @users = User.excluding_guest
     if params[:filter].present?
-      @users = @users.get_by_filter(params[:filter])
+      @users = @users.where(id: params[:filter])
     end
   end
 

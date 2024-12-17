@@ -73,7 +73,7 @@
           <% if user.is_public == true %>
             <div class="col-2 px-0 text-center"><i class="fa-solid fa-unlock"></i></div>
           <% else %>
-            <i class="fa-solid fa-lock"></i>
+            <div class="col-2 px-0 text-center"><i class="fa-solid fa-lock"></i></div>
           <% end %>
         <% elsif admin_namespace? %>
           <% if user.is_public? %>
