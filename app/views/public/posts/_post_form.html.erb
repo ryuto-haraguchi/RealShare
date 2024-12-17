@@ -1,13 +1,14 @@
-<div class="container mt-5">
-<% if post.errors.any? %>
-  <div class="alert alert-danger">
-    <ul>
-      <% post.errors.full_messages.reject { |msg| msg.include?("緯度") || msg.include?("経度") }.each do |message| %>
-        <li><%= message %></li>
-      <% end %>
-    </ul>
-  </div>
-<% end %>
+<%# PCレイアウト %>
+<div class="container mt-5 d-none d-md-block">
+  <% if post.errors.any? %>
+    <div class="alert alert-danger">
+      <ul>
+        <% post.errors.full_messages.reject { |msg| msg.include?("緯度") || msg.include?("経度") }.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
   <div class="row">
     <div class="col-6 offset-3 text-center">
       <% if controller.action_name == "new" || controller.action_name == "create" %>
@@ -89,3 +90,45 @@
     </div>
   <% end %>
 </div>
+
+<%# スマホレイアウト %>
+<div class="container mt-2 d-md-none">
+  <% if post.errors.any? %>
+    <div class="alert alert-danger">
+      <ul>
+        <% post.errors.full_messages.reject { |msg| msg.include?("緯度") || msg.include?("経度") }.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+  <div class="row mb-2">
+    <% if controller.action_name == "new" || controller.action_name == "create" %>
+      <h2 class="col-6 offset-3 text-center">投稿作成</h2>
+    <% elsif controller.action_name == "edit" || controller.action_name == "update" %>
+      <h2 class="col-6 offset-3 text-center">投稿編集</h2>
+    <% end %>
+  </div>
+  <%= form_with model: post, local: true, class: "row align-items-center" do |f| %>
+    <%= f.label :category, "カテゴリ", class: "col-6 py-0 text-center mb-1" %>
+    <%= f.select :category, options_for_select(Post.categories.keys.map { |key| [I18n.t("enums.post.category.#{key}"), key] }), { prompt: "選択" }, { class: "form-control col-4 py-0 text-center mb-1" } %>
+    <%= f.label :prefecture, "都道府県", class: "col-6 py-0 text-center mb-1" %>
+    <%= f.text_field :prefecture, placeholder: "東京都", class: "form-control col-5 py-0 mb-1" %>
+    <%= f.label :city, "市区町村", class: "col-6 py-0 text-center mb-1" %>
+    <%= f.text_field :city, placeholder: "港区", class: "form-control col-5 py-0 mb-1" %>
+    <%= f.label :town, "町名まで", class: "col-6 py-0 text-center mb-1" %>
+    <%= f.text_field :town, placeholder: "白金台", class: "form-control col-5 py-0 mb-1" %>
+    <%= f.label :price, "取引価格", class: "col-6 py-0 text-center mb-1" %>
+    <%= f.number_field :price, placeholder: "100000000", class: "form-control col-5 py-0 mb-1" %>
+    <%= f.label :timing, "取引時期", class: "col-6 py-0 text-center mb-1" %>
+    <%= f.date_field :timing, class: "form-control col-5 py-0 mb-1" %>
+    <%= f.text_field :title, placeholder: "タイトルを入力してください", class: "form-control mx-2 border-bottom" %>
+    <div class="col-12 px-2 rounded border-0" style="height: 150px;">
+      <%= f.text_area :content, placeholder: "本文を入力してください", class: "form-control h-100" %>
+    </div>
+    <% if controller.action_name == "new" || controller.action_name == "create" %>
+      <%= f.submit "投稿する", class: "btn btn-primary mt-3 col-4 offset-4" %>
+    <% elsif controller.action_name == "edit" || controller.action_name == "update" %>
+      <%= f.submit "更新する", class: "btn btn-primary mt-3" %>
+    <% end %>
+  <% end %>
