@@ -14,12 +14,6 @@
       <div class="card-footer row px-0 text-muted pb-1 pb-md-3">
         <span class="col-12 col-md-0"><%= l(post.created_at, format: :long) %></span>
         <span class="col-12 d-flex align-items-center col-md-6"><%= post.full_address %></span>
-        <% if post.user == current_user %>
-          <span class="col-6 col-md-2 text-right offset-md-2"><%= link_to "編集", edit_post_path(post), class: "btn btn-success" %></span>
-          <span class="col-6 col-md-2 text-md-right"><%= link_to "削除", post_path(post), method: :delete, data: { confirm: "本当に削除しますか？" }, class: "btn btn-danger" %></span>
-        <% elsif admin_namespace? %>
-          <span><%= link_to "削除", admin_post_path(post), method: :delete, data: { confirm: "本当に削除しますか？" }, class: "btn btn-danger" %></span>
-        <% end %>
       </div>
     </div>
   <% end %>

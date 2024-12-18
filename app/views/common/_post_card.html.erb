@@ -49,11 +49,13 @@
     </div>
   <% else %>
     <div class="row mb-5">
-      <div class="col d-flex justify-content-between">
-        <span>
-          <%= link_to "通報する", new_notice_path(noticeable_type: Post, noticeable_id: post.id), class: "btn btn-danger" %>
+      <div class="col d-flex justify-content-end">
+        <span style="font-size: 1.5em;" class="mr-5">
+          <%= link_to new_notice_path(noticeable_type: Post, noticeable_id: post.id), data: { confirm: "通報しますか？" } do %>
+            <i class="fa-solid fa-circle-exclamation text-danger"></i>
+          <% end %>
         </span>
-        <span class="bookmark-btn-<%= post.id %>">
+        <span class="bookmark-btn-<%= post.id %> mr-3" style="font-size: 1.5em;">
           <%= render 'public/bookmarks/bookmark_btn', post: post, bookmark: bookmark %>
         </span>
       </div>
