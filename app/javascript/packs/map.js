@@ -73,15 +73,15 @@ async function initMap() {
           const createdAt = post.createdAt;
           return `
           <div class="card mb-2">
-            <div class="card-header">
+            <div class="card-header text-center">
               <strong class="ml-3"><a href="${postPath}" class="text-dark">${title}</a></strong>
             </div>
             <div class="card-body">
               <p class="card-text"><strong>${content}</strong></p>
             </div>
-            <div class="card-footer text-muted d-flex justify-content-between">
-              <span class="mr-5">${createdAt}</span>
-              <span class="ml-5">${fullAddress}</span>
+            <div class="card-footer text-muted">
+              <div>${createdAt}</div>
+              <div>${fullAddress}</div>
             </div>
           </div>
             `;

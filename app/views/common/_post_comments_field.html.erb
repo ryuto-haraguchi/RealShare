@@ -32,8 +32,10 @@
                       <%= link_to "削除", post_comment_path(post, comment), method: :delete, data: { confirm: "本当に削除しますか？" }, class: "btn btn-danger" %>
                     </span>
                   <% else %>
-                    <span class="ml-5">
-                      <%= link_to "通報する", new_notice_path(noticeable_type: Comment, noticeable_id: comment.id), class: "btn btn-danger" %>
+                    <span class="ml-5" style="font-size: 1.5em;">
+                      <%= link_to new_notice_path(noticeable_type: Comment, noticeable_id: comment.id), data: { confirm: "通報しますか？" } do %>
+                        <i class="fa-solid fa-circle-exclamation text-danger"></i>
+                      <% end %>
                     </span>
                   <% end %>
                 <% elsif admin_namespace? %>

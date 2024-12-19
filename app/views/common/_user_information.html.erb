@@ -54,7 +54,7 @@
     </div>
   <% else %>
     <div class="d-flex justify-content-start align-items-center mt-3 ml-4">
-      <i class="fa-solid fa-circle-exclamation"></i><%= link_to "通報する", new_notice_path(noticeable_type: User, noticeable_id: user.id), class: "ml-3 text-dark"%>
+      <i class="fa-solid fa-circle-exclamation text-danger"></i><%= link_to "通報する", new_notice_path(noticeable_type: User, noticeable_id: user.id), data: { confirm: "通報しますか？" }, class: "ml-3 text-danger"%>
     </div>
   <% end %>
 <% end %>
