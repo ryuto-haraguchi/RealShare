@@ -9,7 +9,7 @@
         <div class="input-group mb-3">
           <%= f.text_field :group_name, placeholder: "グループ名", class: "form-control", value: params[:group_name] %>
           <div class="input-group-append">
-            <%= f.submit "検索", class: "btn btn-outline-secondary" %>
+            <%= f.submit "検索", class: "btn btn-outline-secondary", style: "z-index: 0;"%>
           </div>
         </div>
       <% end %>
@@ -32,7 +32,7 @@
       <div class="input-group mb-3">
         <%= f.text_field :group_name, placeholder: "グループ名", class: "form-control", value: params[:group_name] %>
         <div class="input-group-append">
-          <%= f.submit "検索", class: "btn btn-outline-secondary" %>
+          <%= f.submit "検索", class: "btn btn-outline-secondary", style: "z-index: 0;" %>
         </div>
       </div>
     <% end %>
