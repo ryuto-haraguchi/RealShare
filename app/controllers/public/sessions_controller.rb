@@ -12,8 +12,8 @@ class Public::SessionsController < Devise::SessionsController
     if user.is_active == false
       flash[:alert] = "退会済みのユーザーのため、再登録が必要です。"
       redirect_to new_user_registration_path
-    super
     end
+    super
   end
 
   protected
