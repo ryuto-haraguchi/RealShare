@@ -4,10 +4,10 @@
     <table class="table">
       <thead>
         <tr>
-          <th class="col-1">通報ID</th>
-          <th class="col-2">通報種類</th>
+          <th class="col-1 text-center">通報ID</th>
+          <th class="col-2 text-center">通報種類</th>
           <th class="col-3">通報内容</th>
-          <th class="col-2">ステータス</th>
+          <th class="col-2 text-center">ステータス</th>
           <th class="col-3">通報日時</th>
           <th class="col-1"></th>
         </tr>
@@ -15,8 +15,8 @@
       <tbody>
         <% @notices.each do |notice| %>
           <tr>
-            <td><%= notice.id %></td>
-            <td>
+            <td class="text-center"><%= notice.id %></td>
+            <td class="text-center">
               <% if notice.noticeable_type == "Post" %>
                 投稿
               <% elsif notice.noticeable_type == "User" %>
@@ -26,9 +26,13 @@
               <% end %>
             </td>
             <td><%= notice.reason %></td>
-            <td><%= notice.status_i18n %></td>
+            <% if notice.status_i18n == "確認済" %>
+              <td class="text-center text-success"><%= notice.status_i18n %></td>
+            <% else %>
+              <td class="text-center text-danger"><%= notice.status_i18n %></td>
+            <% end %>
             <td><%= l(notice.created_at, format: :long) %></td>
-            <td><%= link_to "詳細", admin_notice_path(notice), class: "text-dark" %></td>
+            <td><%= link_to "詳細", admin_notice_path(notice) %></td>
           </tr>
         <% end %>
     </table>

@@ -1,6 +1,7 @@
-<div class="container mt-3">
+<%# ここからPCレイアウト %>
+<div class="container mt-3 d-none d-md-block">
   <div class="row mb-2">
-    <div class="col-3 p-0 m-0 form-group d-flex align-items-center justify-content-center">
+    <div class="col-3 p-0 m-0 d-flex align-items-center justify-content-center">
       <%= form_with url: searches_path, method: :get, local: true, class: "form-inline d-flex" do |f| %>
         <%= f.text_field :keyword, placeholder: "投稿ワード", class: "form-control", value: params[:keyword] %>
         <%= f.submit "検索", class: "btn btn-outline-secondary" %>
@@ -9,11 +10,15 @@
     <div class="col-4 m-0 p-0 d-flex justify-content-center">
       <%= form_with url: posts_path, method: :get, local: true, class: "d-flex align-items-center" do |f| %>
         <div>
-          <div class="form-group mb-1 mr-3">
-            <%= f.select :category, options_for_select(Post.categories.keys.map{ |key| [I18n.t("enums.post.category.#{key}"), key] }), prompt: "カテゴリー選択", class: "form-control" %>
+          <div class=" mb-1 mr-3">
+            <%= f.select :category, options_for_select(Post.categories.keys.map{ |key| [I18n.t("enums.post.category.#{key}"), key] }), 
+                        { prompt: "カテゴリー選択" },
+                        { class: "text-black-50 " } %>
           </div>
-          <div class="form-group mb-1 mr-3">
-            <%= f.select :prefecture, options_for_select(Post.pluck(:prefecture).uniq), prompt: "地域選択", class: "form-control" %>
+          <div class=" mb-1 mr-3">
+            <%= f.select :prefecture, options_for_select(Post.pluck(:prefecture).uniq),
+                          { prompt: "地域選択" },
+                          { class: "text-black-50" } %>
           </div>
         </div>
         <div>
@@ -23,15 +28,19 @@
     </div>
     <div class="col-3 m-0 p-0 d-flex align-items-center justify-content-center">
       <%= form_with url: posts_path, method: :get, class: "d-flex align-items-center", local: true do |f| %>
-        <div class="form-group mb-0">
-          <%= f.select :sort, options_for_select([["新しい順", "new"], ["古い順", "old"]], params[:sort]), class: "align-middle form-control" %>
+        <div class=" mb-0">
+          <%= f.select :sort, options_for_select([["新しい順", "new"], ["古い順", "old"]], params[:sort]),
+                              { prompt: "並び替え" }, 
+                              { class: "text-black-50" } %>
         </div>
         <div class="ml-3">
           <%= f.submit "ソート", class: "btn btn-outline-secondary" %>
         </div>
       <% end %>
     </div>
-    <div class="col-2 d-flex align-items-center justify-content-center">MAP</div>
+    <div class="col-2 d-flex align-items-center justify-content-center">
+      <%= link_to "Mapでみる", maps_path, class: "btn btn-outline-secondary" %>
+    </div>
   </div>
   <% if posts.any? %>
     <% posts.each do |post| %>
@@ -67,4 +76,71 @@
 </div>
 <div class="d-flex justify-content-center align-items-center">
   <%= paginate posts %>
+</div>
+
+<%# ここからスマホレイアウト %>
+<div class="d-md-none">
+  <div class="container">
+    <%= form_with url: searches_path, method: :get, local: true, class: "form-inline d-flex row px-2 mb-2" do |f| %>
+      <%= f.text_field :keyword, placeholder: "投稿ワード", class: "form-control col-10", value: params[:keyword] %>
+      <%= f.submit "検索", class: "btn btn-outline-secondary col-2" %>
+    <% end %>  
+
+    <%= form_with url: posts_path, method: :get, local: true, class: "d-flex align-items-center row px-2 mb-2" do |f| %>
+      <div class="form-control col-5 d-flex justify-content-center align-items-center">
+        <%= f.select :category, options_for_select(Post.categories.keys.map{ |key| [I18n.t("enums.post.category.#{key}"), key] }), 
+                                { prompt: "カテゴリー選択" },
+                                { class: "border-0  text-black-50" } %>
+      </div>
+      <div class="form-control col-4 d-flex justify-content-center align-items-center">
+        <%= f.select :prefecture, options_for_select(Post.pluck(:prefecture).uniq),
+                                  { prompt: "地域選択" },
+                                  { class: "border-0  text-black-50" } %>
+      </div>
+      <%= f.submit "絞り込み", class: "btn btn-outline-secondary col-3" %>
+    <% end %>
+
+    <%= form_with url: posts_path, method: :get, class: "d-flex align-items-center row px-2 mb-2", local: true do |f| %>
+      <div class="form-control col-9 d-flex justify-content-center align-items-center">
+        <%= f.select :sort, options_for_select([["新しい順", "new"], ["古い順", "old"]], params[:sort]),
+                            { prompt: "並び替え" }, 
+                            { class: "border-0  text-black-50" } %>
+      </div>
+      <%= f.submit "ソート", class: "btn btn-outline-secondary col-3" %>
+    <% end %>
+
+    <div class="row px-2 mb-3"> 
+      <%= link_to "Mapでみる", maps_path, class: "btn btn-info col-12" %>
+    </div>
+  </div>
+
+  <% if posts.any? %>
+    <% posts.each do |post| %>
+      <%= image_tag post.user.get_profile_image(50,50) %>
+      <%= link_to post.user.name, user_path(post.user), class: "text-dark" %>
+      <div class="card mb-4">
+        <div class="card-header">
+          <span class="category-item d-inline-block text-center" data-category="<%= post.category_before_type_cast %>">
+            <%= post.category_i18n %>
+          </span>
+          <strong class="ml-3"><%= link_to post.title, post_path(post), class: "text-dark" %></strong>
+        </div>
+        <div class="card-body">
+          <p class="card-text"><%= post.content %></p>
+        </div>
+        <div class="card-footer row m-0 text-muted d-flex justify-content-between">
+          <span class="col-12 px-0"><%= l(post.created_at, format: :long) %></span>
+          <span class="col-12 px-0"><%= post.full_address %></span>
+        </div>
+      </div>
+    <% end %>
+  <% else %>
+    <div class="col-12 mt-5 text-center">
+      <p>投稿がありません</p>
+    </div>
+  <% end %>
+
+  <%= paginate posts %>
+
+
 </div>

@@ -1,8 +1,13 @@
-<div class="container mt-5">
+<div class="container mt-3">
   <div class="row">
-    <div class="col-6 offset-3 text-center mb-3">
+    <%# PCレイアウト %>
+    <div class="col-6 offset-3 text-center mb-3 d-none d-md-block">
       <h2>グループ一覧</h2>
     </div>
-    <%= render 'group_index', groups: @groups %>
+    <%# スマホレイアウト %>
+    <div class="col-12 text-center mb-3 d-md-none">
+      <h2>グループ一覧</h2>
+    </div>
   </div>
+  <%= render 'group_index', groups: @groups %>
 </div>

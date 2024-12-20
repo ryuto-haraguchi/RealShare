@@ -24,6 +24,7 @@ ja:
         prefecture: "都道府県"
         city: "市区町村"
         town: "町名"
+        full_address: "住所"
         latitude: "緯度"
         longitude: "経度"
       user:

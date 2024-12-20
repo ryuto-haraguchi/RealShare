@@ -4,68 +4,94 @@
 
 <div class="container">
   <div class="row">
-    <div class="col">
-      <div class="card">
-        <div class="card-header bg-info p-2 text-white">
-          <span>
-            <strong class="ml-3">コメント一覧</strong>
-          </span>
-        </div>
-        <% if comments.any? %>
-          <% comments.each do |comment| %>
-            <div class="card-body border-top d-flex">
-              <div class="mr-4">
-          <%= image_tag comment.user.get_profile_image(50,50) %>
-              </div>
-              <div class="row">
-          <div class="col-12">
-            <% if public_namespace? %>
-              <%= link_to comment.user.name, user_path(comment.user), class: "border-bottom text-dark text-decoration-none"%>
-            <% elsif admin_namespace? %>
-              <%= link_to comment.user.name, admin_user_path(comment.user), class: "border-bottom text-dark text-decoration-none"%>
-            <% end %>
-          </div>
-          <div class="col-12">
-            <%= comment.content %>
-            <% if public_namespace? %>
-              <% if comment.user == current_user %>
-                <span class="ml-5">
-                  <%= link_to "削除", post_comment_path(post, comment), method: :delete, data: { confirm: "本当に削除しますか？" }, class: "btn btn-danger" %>
-                </span>
-              <% end %>
-            <% elsif admin_namespace? %>
-                 <span class="ml-5">
-                  <%= link_to "削除", admin_comment_path(comment), method: :delete, data: { confirm: "本当に削除しますか？" }, class: "btn btn-danger" %>
-                </span>
-            <% end %>
-          </div>
-              </div>
-            </div>
-          <% end %>
-        <% else %>
-          <div class="card-body">
-            コメントはありません
-          </div>
-        <% end %>
-        <% if public_namespace? %>
-          <div class="card-footer text-muted bg-white">
-            <div class="row">
-              <div class="col-1 text-right"><%= image_tag post.user.get_profile_image(50,50) %></div>
-              <div class="col-11">
-                <%= form_with model: @comment, url: post_comments_path(post), method: :post, class: "w-100" do |f| %>
-                <%= f.hidden_field :user_id, value: current_user.id %>
-                <%= f.hidden_field :post_id, value: post.id %>
-                <%= f.text_area :content, class: "form-control w-100", placeholder: "コメントを入力してください" %>
-              </div>
-              <div class="col-2 offset-1">※255文字以内</div>
-              <div class="col-2 offset-7">
-                <%= f.submit "コメントする", class: "btn btn-primary mt-2" %>
-              </div>
-              <% end %>
-            </div>
-          </div>
-        <% end %>
+    <div class="card col p-0">
+      <div class="card-header bg-info p-2 text-white">
+        <span>
+          <strong class="ml-3">コメント一覧</strong>
+        </span>
       </div>
+      <% if comments.any? %>
+        <% comments.each do |comment| %>
+          <div class="card-body border-top d-flex">
+            <div class="mr-4">
+              <%= image_tag comment.user.get_profile_image(50,50) %>
+            </div>
+            <div class="row">
+              <div class="col-12">
+                <% if public_namespace? %>
+                  <%= link_to comment.user.name, user_path(comment.user), class: "border-bottom text-dark text-decoration-none"%>
+                <% elsif admin_namespace? %>
+                  <%= link_to comment.user.name, admin_user_path(comment.user), class: "border-bottom text-dark text-decoration-none"%>
+                <% end %>
+              </div>
+              <div class="col-12">
+                <%= comment.content %>
+                <% if public_namespace? %>
+                  <% if comment.user == current_user %>
+                    <span class="ml-5">
+                      <%= link_to "削除", post_comment_path(post, comment), method: :delete, data: { confirm: "本当に削除しますか？" }, class: "btn btn-danger" %>
+                    </span>
+                  <% else %>
+                    <span class="ml-5" style="font-size: 1.5em;">
+                      <%= link_to new_notice_path(noticeable_type: Comment, noticeable_id: comment.id), data: { confirm: "通報しますか？" } do %>
+                        <i class="fa-solid fa-circle-exclamation text-danger"></i>
+                      <% end %>
+                    </span>
+                  <% end %>
+                <% elsif admin_namespace? %>
+                    <span class="ml-5">
+                      <%= link_to "削除", admin_comment_path(comment), method: :delete, data: { confirm: "本当に削除しますか？" }, class: "btn btn-danger" %>
+                    </span>
+                <% end %>
+              </div>
+            </div>
+          </div>
+        <% end %>
+      <% else %>
+        <div class="card-body">
+          コメントはありません
+        </div>
+      <% end %>
+      <% if public_namespace? %>
+        <%# PCレイアウト %>
+        <div class="card-footer text-muted bg-white d-none d-md-block">
+          <div class="row">
+            <div class="col-1 text-right"><%= image_tag post.user.get_profile_image(50,50) %></div>
+            <div class="col-11">
+              <%= form_with model: @comment, url: post_comments_path(post), method: :post, class: "w-100" do |f| %>
+              <%= f.hidden_field :user_id, value: current_user.id %>
+              <%= f.hidden_field :post_id, value: post.id %>
+              <%= f.text_area :content, class: "form-control w-100", placeholder: "コメントを入力してください" %>
+            </div>
+            <div class="col-2 offset-1">※255文字以内</div>
+            <div class="col-2 offset-7">
+              <%= f.submit "コメントする", class: "btn btn-primary mt-2" %>
+            </div>
+            <% end %>
+          </div>
+        </div>
+        <%# スマホレイアウト %>
+        <div class="card-footer text-muted bg-white d-md-none">
+          <div class="row">
+            <div class="col-2 ml-2"><%= image_tag post.user.get_profile_image(50,50) %></div>
+
+            <%= form_with model: @comment, url: post_comments_path(post), method: :post, class: "col-12 w-100" do |f| %>
+              <%= f.hidden_field :user_id, value: current_user.id %>
+              <%= f.hidden_field :post_id, value: post.id %>
+              <div class="mb-2" style="height: 100px;">
+                <%= f.text_area :content, class: "form-control w-100 h-100", placeholder: "コメントを入力してください" %>
+              </div>
+              <div class="d-flex justify-content-between align-items-center">
+                <span>※255文字以内</span>
+                <span>
+                  <%= f.submit "コメントする", class: "btn btn-primary" %>
+                </span>
+              </div>
+            <% end %>
+          </div>
+        </div>
+
+      <% end %>
     </div>
   </div>
 </div>

@@ -1,7 +1,10 @@
-class Admin::UsersController < ApplicationController
+class Admin::UsersController < Admin::ApplicationController
 
   def index
     @users = User.excluding_guest
+    if params[:filter].present?
+      @users = @users.where(id: params[:filter])
+    end
   end
 
   def show

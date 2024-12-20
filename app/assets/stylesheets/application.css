@@ -4,6 +4,13 @@
   box-sizing: border-box;
 }
 
+body {
+  background-image: url(bg.png);
+  background-size: cover;
+  background-position: center;
+  background-attachment: fixed;
+}
+
 .header {
   height: 80px;
   width: 95%;
@@ -26,54 +33,76 @@
   text-decoration: none;
 }
 
-.nav-box {
-  margin-right: 10px;
+/* メニュー */
+
+.menu-btn{
+  position: fixed;
+  top: 40px;
+  right: 80px;
+  z-index: 2;
+  width: 60px;
+  height: 60px;
   display: flex;
+  justify-content: center;
   align-items: center;
+  background: #468284;
+  color: white;
+  border-radius: 50%;
 }
 
-.nav-link {
-  font-size: 18px;
-}
-
-.custom-navbar {
-  position: relative;
-  background-color: cadetblue;
-  padding: 0;
+/*----------------------------
+* メニュー本体
+*----------------------------*/
+.menu{
+  position: fixed;
+  top: 0;
+  right: 0;
   z-index: 1;
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background: rgba(0,0,0,.8);
+  ;
 }
 
-.custom-navbar .navbar-toggler {
-  border-color: white;
+.menu__item{
+  width: 100%;
+  height: auto;
+  padding: .5em 1em;
+  text-align: center;
+  color: #fff;
+  box-sizing: border-box;
+  font-size: 1.5em;
 }
 
-.custom-navbar .navbar-toggler-icon {
-  background-image: url("data:image/svg+xml;charset=UTF8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'%3E%3Cpath stroke='rgba(255, 255, 255, 1)' stroke-width='2' d='M4 7h22M4 15h22M4 23h22'/%3E%3C/svg%3E");
+/* アニメーション前のメニューの状態 */
+.menu{
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity .3s linear;
+}
+/* アニメーション後のメニューの状態 */
+.menu.is-active{
+  pointer-events: auto;
+  opacity: 1;
 }
 
-.dropdown-menu {
-  background-color: cadetblue;
-}
+/* スマホサイズメニュー */
+@media screen and (max-width: 768px) {
+  .menu-btn{
+    top: 52px;
+    right: 40px;
+    z-index: 2;
+    width: 40px;
+    height: 40px;
+  }
 
-.dropdown-menu a {
-  color: white;
-}
-
-.nav-item .nav-link {
-  color: white;
-  border-radius: 30px;
-  margin-left: 5px;
-  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.2);
-}
-
-.nav-item .nav-link:hover {
-  box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.3); /* 強いシャドウ */
-  transform: translateY(-3px); /* 少し上に移動 */
-}
-
-.nav-item .nav-link:active {
-  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.2); /* 元のシャドウに戻る */
-  transform: translateY(0); /* 元の位置に戻る */
+  .menu {
+    width: auto;
+  }
 }
 
 body {
@@ -97,9 +126,62 @@ body {
   border-radius: 30px;
   margin: 0 auto;
   margin-top: 30px;
-  margin-bottom: 10px;
+  margin-bottom: 30px;
 }
 
 .field_with_errors {
   display: contents; 
+}
+
+#map {
+  width: 100%;
+  height: calc(100vh - 80px - 80px);
+}
+
+#map-show {
+  width: 100%;
+  height: 300px;
+}
+
+.user-tag {
+  background-color: #4285F4;
+  border-radius: 8px;
+  color: #FFFFFF;
+  font-size: 14px;
+  padding: 10px 15px;
+  position: relative;
+}
+
+.user-tag::after {
+  content: "";
+  position: absolute;
+  left: 50%;
+  top: 100%;
+  transform: translate(-50%, 0);
+  width: 0;
+  height: 0;
+  border-left: 8px solid transparent;
+  border-right: 8px solid transparent;
+  border-top: 8px solid #4285F4;
+}
+
+@media screen and (max-width: 375px) {
+  .header {
+    height: 60px;
+    padding: 0px;
+  }
+
+  .header .fa-house {
+    font-size: 40px;
+    margin-top: 7px;
+  }
+
+  .header .logo-title {
+    font-size: 30px;
+  }
+
+  .footer {
+    height: 60px;
+    padding: 0px;
+  }
 }
