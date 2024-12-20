@@ -6,10 +6,10 @@ class User < ApplicationRecord
   has_many :posts, dependent: :destroy
   has_many :comments, dependent: :destroy
   has_many :bookmarks, dependent: :destroy
-  has_many :bookmark_posts, through: :bookmarks, source: :post
+  has_many :bookmark_posts, through: :bookmarks, source: :post dependent: :destroy
   has_many :owned_groups, class_name: 'Group', foreign_key: 'owner_id', dependent: :destroy
   has_many :group_users, dependent: :destroy
-  has_many :groups, through: :group_users
+  has_many :groups, through: :group_users dependent: :destroy
   has_many :notices, dependent: :destroy
   has_many :received_notices, as: :noticeable, class_name: 'Notice', dependent: :destroy
 
