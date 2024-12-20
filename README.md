@@ -22,7 +22,9 @@
 
 
 ## 設計書
-後ほど作成予定
+・ER図（https://drive.google.com/file/d/1dZrUpj-9aI9FeoJTI7rhz716POju4FLT/view?usp=sharing）
+・テーブル定義書（https://docs.google.com/spreadsheets/d/104dcls5_Kn3le7NkoOc3dBVjfbdNFMhF2faq2EdaRe0/edit?usp=sharing）
+
 
 ## 開発環境
 - OS:mac
@@ -32,4 +34,5 @@
 - IDE:VSCode
 
 ## 使用素材
-著作権を考慮し、架空のデータを扱う予定です。
+・フリーイラスト素材として以下を使用
+  ・pixabay(https://pixabay.com/ja/)
