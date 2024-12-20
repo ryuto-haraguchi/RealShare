@@ -84,9 +84,22 @@
 <% end %>
 
 <script>
-  $(function(){
-    $('.menu-btn').on('click', function(){
-      $('.menu').toggleClass('is-active');
-    });
-  }());
+  //クリックイベントでis-activeクラスを追加
+  $(document).ready(function() {
+  // メニューボタンをクリックしてメニューを開閉
+  $('.menu-btn').on('click', function() {
+    $('.menu').toggleClass('is-active');
+  });
+  
+  // どこをクリックしてもメニューを閉じる
+  $(document).on('click', function(e) {
+    // メニューとメニューボタン以外をクリックした場合でも閉じる
+    if (!$(e.target).closest('.menu, .menu-btn').length) {
+      $('.menu').removeClass('is-active');
+    } else if ($(e.target).closest('.menu').length) {
+      // メニュー内をクリックした場合も閉じる
+      $('.menu').removeClass('is-active');
+    }
+  });
+});
 </script> 
