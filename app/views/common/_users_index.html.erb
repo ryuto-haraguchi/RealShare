@@ -47,11 +47,11 @@
                   <i class="fa-solid fa-lock"></i>
                 <% end %>
               <% elsif admin_namespace? %>
-                <% if user.is_public? %>
+                <% if user.is_active? %>
                   登録中
                 <% else %>
                   退会済
-                  <% end %>
+                <% end %>
               <% end %>
             </td>
           </tr>
