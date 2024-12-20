@@ -67,6 +67,7 @@ class User < ApplicationRecord
       comments.destroy_all
       groups.destroy_all
       bookmarks.destroy_all
+      sign_out current_user
     end
   end
 
