@@ -2,7 +2,8 @@ class Post < ApplicationRecord
 
   enum category: { "buy": 0, "sale": 1, "rental": 2, "local_information": 3 }
 
-  belongs_to :user
+  belongs_to :user, counter_cache: true
+  # N+1問題の解決: counter_cacheを使って、userのpost_countをキャッシュ
   has_many :comments, dependent: :destroy
   has_many :bookmarks, dependent: :destroy
   has_many :bookmark_users, through: :bookmarks, source: :user
