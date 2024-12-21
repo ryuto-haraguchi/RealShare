@@ -3,7 +3,12 @@ class Public::UsersController < Public::ApplicationController
   before_action :permission_confirmation, only: [:update, :destroy]
 
   def index
-    @users = User.excluding_guest.active_users.page(params[:page]).per(5)
+    # N+1問題の解決: profile_image_attachmentとpostsを事前ロード
+    @users = User.includes(profile_image_attachment: :blob)
+    .where.not(email: "guest@example.com")
+    .where(is_active: true)
+    .page(params[:page])
+    .per(5)
   end
 
   def mypage
