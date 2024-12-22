@@ -3,7 +3,6 @@ class Public::GroupsController < Public::ApplicationController
   before_action :permission_confirmation, only: [:update, :edit, :destroy]
 
   def index
-    # N+1問題の解決: ownerとgroup_usersを事前ロード
     @groups = Group.all.page(params[:page]).per(5)
   end
 

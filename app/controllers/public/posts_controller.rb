@@ -4,7 +4,7 @@ class Public::PostsController < Public::ApplicationController
 
   def index
     # N+1問題の解決: userとprofile_image_attachmentを事前ロード
-    @posts = Post.includes(user: { profile_image_attachment: :blob }).order(created_at: :desc)
+    @posts = Post.includes(user: {profile_image_attachment: :blob}).order(created_at: :desc)
     #フィルター機能
     @posts = @posts.where(category: params[:category]) if params[:category].present?
     @posts = @posts.where(prefecture: params[:prefecture]) if params[:prefecture].present?
@@ -25,7 +25,7 @@ class Public::PostsController < Public::ApplicationController
   def show
     @post = Post.find(params[:id])
     @comment = Comment.new
-    @comments = @post.comments
+    @comments = @post.comments.includes(user: { profile_image_attachment: :blob })
     @bookmark = @post.bookmarks.find_by(user_id: current_user.id)
 
     respond_to do |format|
