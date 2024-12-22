@@ -1,7 +1,7 @@
 class Admin::UsersController < Admin::ApplicationController
 
   def index
-    @users = User.excluding_guest
+    @users = User.includes(profile_image_attachment: :blob).excluding_guest
     if params[:filter].present?
       @users = @users.where(id: params[:filter])
     end

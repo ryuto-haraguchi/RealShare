@@ -3,7 +3,8 @@ class Public::PostsController < Public::ApplicationController
   before_action :permission_confirmation, only: [:update, :edit, :destroy]
 
   def index
-    @posts = Post.all
+    # N+1問題の解決: userとprofile_image_attachmentを事前ロード
+    @posts = Post.includes(user: { profile_image_attachment: :blob }).order(created_at: :desc)
     #フィルター機能
     @posts = @posts.where(category: params[:category]) if params[:category].present?
     @posts = @posts.where(prefecture: params[:prefecture]) if params[:prefecture].present?

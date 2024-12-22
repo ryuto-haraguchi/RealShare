@@ -8,7 +8,7 @@
         </div>
         <div class="card-body">
           <p class="card-text"><%= group.description.truncate(25) %></p>
-          <p class="card-text">メンバー数：<%= group.group_users.count %></p>
+          <p class="card-text">メンバー数：<%= group.users_count %></p>
           <p class="card-text">作成日時：<%= l(group.created_at, format: :long) %></p>
         </div>
       </div>
@@ -25,7 +25,7 @@
           <p class=" text-white m-0"><%= group.name %></p>
         </div>
         <span class="col-9 mt-1"><%= group.description.truncate(20) %></span>
-        <div class="col-12 mt-1">メンバー数：<%= group.group_users.count %></div>
+        <div class="col-12 mt-1">メンバー数：<%= group.users_count %></div>
         <div class="col-12 mt-1 mb-1">作成日時：<%= l(group.created_at, format: :long) %></div>
       </div>
     <% end %>
