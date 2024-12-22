@@ -3,7 +3,7 @@ class Public::UsersController < Public::ApplicationController
   before_action :permission_confirmation, only: [:update, :destroy]
 
   def index
-    # N+1問題の解決: profile_image_attachmentとpostsを事前ロード
+    # N+1問題の解決: profile_image_attachmentを事前ロード
     @users = User.includes(profile_image_attachment: :blob)
                   .where.not(email: "guest@example.com")
                   .where(is_active: true)
