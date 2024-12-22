@@ -48,9 +48,9 @@
                 <% end %>
               <% elsif admin_namespace? %>
                 <% if user.is_active? %>
-                  登録中
+                  <div class="text-success">登録中</div>
                 <% else %>
-                  退会済
+                  <div class="text-danger">退会済</div>
                 <% end %>
               <% end %>
             </td>
@@ -77,9 +77,9 @@
           <% end %>
         <% elsif admin_namespace? %>
           <% if user.is_public? %>
-            登録中
+            <div class="text-success">登録中</div>
           <% else %>
-            退会済
+            <div class="text-danger">退会済</div>
           <% end %>
         <% end %>
         </div>

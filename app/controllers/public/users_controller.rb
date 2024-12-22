@@ -5,10 +5,10 @@ class Public::UsersController < Public::ApplicationController
   def index
     # N+1問題の解決: profile_image_attachmentとpostsを事前ロード
     @users = User.includes(profile_image_attachment: :blob)
-    .where.not(email: "guest@example.com")
-    .where(is_active: true)
-    .page(params[:page])
-    .per(5)
+                  .where.not(email: "guest@example.com")
+                  .where(is_active: true)
+                  .page(params[:page])
+                  .per(5)
   end
 
   def mypage

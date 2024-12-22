@@ -19,7 +19,7 @@
           <p class="mb-0 mt-3"><strong>作成日</strong></p>
           <div><%= l(@group.created_at, format: :long) %></div>
           <p class="mb-0 mt-3">メンバー数</p>
-          <div><%= link_to @group.group_users.count, group_group_users_path(@group), class: "text-secondary" %></div>
+          <div><%= link_to @group.users_count, group_group_users_path(@group), class: "text-secondary" %></div>
         </div>
         <% if @group.owner == current_user %>
           <div class="card-footer d-flex justify-content-between">
@@ -55,7 +55,7 @@
         <p class="mb-0 mt-3"><strong>作成日</strong></p>
         <div><%= l(@group.created_at, format: :long) %></div>
         <p class="mb-0 mt-3">メンバー数</p>
-        <div><%= link_to @group.group_users.count, group_group_users_path(@group), class: "text-secondary" %></div>
+        <div><%= link_to @group.users_count, group_group_users_path(@group), class: "text-secondary" %></div>
       </div>
       <div class="card-footer d-flex justify-content-end">
       <% if @group.owner == current_user %>

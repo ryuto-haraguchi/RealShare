@@ -3,12 +3,13 @@ class Public::GroupsController < Public::ApplicationController
   before_action :permission_confirmation, only: [:update, :edit, :destroy]
 
   def index
-    @groups = Group.all
+    # N+1問題の解決: ownerとgroup_usersを事前ロード
+    @groups = Group.all.page(params[:page]).per(5)
   end
 
   def show
     @group = Group.find(params[:id])
-    @posts = @group.posts.order(created_at: :desc).page(params[:page]).per(5)
+    @posts = @group.posts.includes(user: { profile_image_attachment: :blob }).order(created_at: :desc).page(params[:page]).per(5)
     @bookmark = current_user.bookmarks.where(post_id: @posts.pluck(:id))
   end
 
