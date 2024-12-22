@@ -38,6 +38,18 @@
           <%= link_to "Logout", destroy_user_session_path, method: :delete %>
         </div>
       </div>
+    <% else %>
+      <div class="menu-btn">
+        <i class="fa fa-bars"></i>
+      </div>
+      <div class="menu">
+        <div class="menu__item">
+          <%= link_to 'Top', root_path %>
+        </div>
+        <div class="menu__item">
+          <%= link_to "Login", new_user_session_path %>
+        </div>
+      </div>
     <% end %>
     </div>
   </div>
