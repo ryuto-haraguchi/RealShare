@@ -5,13 +5,23 @@
 <div class="container">
   <div class="row">
     <h1 class="title col-md-12 mb-md-5">地域のRealをここに <i class="fa-solid fa-earth-asia"></i></h1>
+    <p class="top-content col-md-12 text-center mb-4 d-none d-md-block">
+      RealShareは、不動産取引や地域情報を<br>
+      共有する口コミ型コミュニティサイトです。<br>  
+      実際の取引価格を共有し、住んでいる人のリアルな声を参考に<br>
+      あなたに合った街や物件を見つけましょう。
+    </p>
+    <p class="top-content col-md-12 text-center d-md-none">
+      RealShareは、不動産取引や地域情報を<br>
+      共有する口コミ型コミュニティサイトです。<br>  
+      実際の取引価格を共有し、<br>
+      住んでいる人のリアルな声を参考に<br>
+      あなたに合った街や物件を見つけましょう。
+    </p>
     <div class="col-6 offset-3 text-center">
       <%= link_to "新規登録", new_user_registration_path, class: "btn text-decoration-none btn-sign-up" %>
     </div>
-    <div class="col-6 offset-3 text-center mt-5">
-      <%= link_to "ログイン", new_user_session_path, class: "btn text-decoration-none btn-sign-in" %>
-    </div>
-    <div class="col-6 offset-3 text-center mt-5">
+    <div class="col-6 offset-3 text-center mt-3">
       <%= link_to "ゲスト", guest_sign_in_path, method: :post, class: "btn text-decoration-none btn-guest" %>
     </div>
   </div>
