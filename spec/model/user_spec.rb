@@ -31,4 +31,43 @@ describe User do
       expect(subject).to_not be_valid
     end
   end
+
+  context "メソッドテスト" do
+    it "self.guest" do
+      expect{ User.guest }.to change { User.count }.by(1)
+    end
+
+    it "guest_user?" do
+      user = User.guest
+      expect(user.guest_user?).to eq true
+    end
+
+    it "full_address" do
+      user = FactoryBot.build(:user)
+      expect(user.full_address).to eq "#{user.prefecture}#{user.city}#{user.town}"
+    end
+
+    it "user_leave" do
+      user = FactoryBot.create(:user)
+      post = FactoryBot.create(:post, user: user)
+      comment = FactoryBot.create(:comment, post: post, user: user)
+      own_group = FactoryBot.create(:group, owner: user)
+      group_user = FactoryBot.create(:group_user, user: user, group: own_group)
+      bookmark = FactoryBot.create(:bookmark, user: user, post: post)
+      notice = FactoryBot.create(:notice, user: user, noticeable: post)
+      expect(Post.count).to eq(1)
+      expect(Comment.count).to eq(1)
+      expect(Group.count).to eq(1)
+      expect(GroupUser.count).to eq(1)
+      expect(Bookmark.count).to eq(1)
+      expect(Notice.count).to eq(1)
+
+      expect { user.update(is_active: false) }.to change { Post.count }.by(-1)
+                                             .and change { Comment.count }.by(-1)
+                                             .and change { Group.count }.by(-1)
+                                             .and change { GroupUser.count }.by(-1)
+                                             .and change { Bookmark.count }.by(-1)
+                                             .and change { Notice.count }.by(-1)
+    end
+  end
 end

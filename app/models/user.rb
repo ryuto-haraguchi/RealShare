@@ -65,9 +65,10 @@ class User < ApplicationRecord
     if is_active_changed? && !is_active
       posts.destroy_all
       comments.destroy_all
-      groups.destroy_all
+      owned_groups.destroy_all
+      group_users.destroy_all
       bookmarks.destroy_all
-      sign_out current_user
+      notices.destroy_all
     end
   end
 

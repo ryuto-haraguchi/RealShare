@@ -6,7 +6,7 @@ class Public::RegistrationsController < Devise::RegistrationsController
   def create
     if User.where(email: sign_up_params[:email], is_active: false).exists?
       flash[:alert] = 'このメールアドレスは既に退会済みです。再登録はできません。'
-      redirect_to new_user_registration_path 
+      redirect_to new_user_registration_path and return
     end
     super
   end
