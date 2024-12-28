@@ -15,7 +15,7 @@ class Admin::UsersController < Admin::ApplicationController
   def destroy
     @user = User.find(params[:id])
     @user.destroy
-    redirect_to notices_path
+    redirect_to admin_notices_path
   end
 
 end

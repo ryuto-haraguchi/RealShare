@@ -9,11 +9,16 @@ class Public::SessionsController < Devise::SessionsController
 
   def create
     user = User.find_by(email: params[:user][:email])
+
+    if user.nil?
+      flash[:alert] = "メールアドレが登録されていません。"
+      redirect_to new_user_session_path and return
+    end
+
     if user.is_active == false
       flash[:alert] = "退会済みのユーザーのため、再登録が必要です。"
       redirect_to new_user_registration_path and return
     end
-    super
   end
 
   protected
