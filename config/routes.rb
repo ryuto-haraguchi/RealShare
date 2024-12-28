@@ -7,7 +7,7 @@ Rails.application.routes.draw do
   namespace :admin do
 
     devise_scope :admin do
-      root to: 'homes#top'
+      root to: 'sessions#new'
     end
 
     get 'top' => 'homes#top'
