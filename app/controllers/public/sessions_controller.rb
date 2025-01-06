@@ -19,12 +19,10 @@ class Public::SessionsController < Devise::SessionsController
       flash[:alert] = "退会済みのユーザーのため、再登録が必要です。"
       redirect_to new_user_registration_path and return
     end
-  end
 
-  protected
-
-  def after_sign_in_path_for(resource)
-    mypage_users_path
+    sign_in(user) 
+    flash[:notice] = "ログインしました。"
+    redirect_to mypage_users_path
   end
 
 end
