@@ -29,7 +29,7 @@
       <tbody>
         <% users.each do |user| %>
           <tr>
-            <td class="col-md-2 text-center"><%= image_tag user.get_profile_image(50, 50) if user.present? %></td>
+            <td class="col-md-2 text-center"><%= image_tag user.get_profile_image(50, 50) %></td>
             <td class="col-md-3 text-center align-middle">
               <% if public_namespace? %>
                 <%= link_to user.name, user_path(user), class: "text-secondary" %>
@@ -62,7 +62,7 @@
     <% users.each do |user| %>
       <div class="card col-12 d-md-none">
         <div class="card-body row align-items-center p-0">
-          <%= image_tag user.get_profile_image(50,50), class: "col-3 px-0" if user.present? %>
+          <%= image_tag user.get_profile_image(50,50), class: "col-3 px-0" %>
         <% if public_namespace? %>
           <%= link_to user.name, user_path(user), class: "text-secondary col-5 px-0 text-center" %>
         <% elsif admin_namespace? %>
